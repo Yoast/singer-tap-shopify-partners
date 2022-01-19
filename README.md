@@ -1,16 +1,16 @@
 # singer-tap-shopify-partners
-This is a Singer tap that produces JSON-formatted data following the Singer spec.
+This is a [Singer](https://singer.io) tap that produces JSON-formatted data following the [Singer spec](https://github.com/singer-io/getting-started/blob/master/docs/SPEC.md#singer-specification).
 
 This tap:
 
-- Pulls raw data from Shopify Partners
+- Pulls raw data from [Shopify Partners](https://shopify.dev/api/partner)
 - Extracts the following resources:
-  - Transactions
-  - App install/uninstall events
+  - [Transactions](https://shopify.dev/api/partner/reference/transactions)
+  - [App install/uninstall events](https://shopify.dev/api/partner/reference/apps)
 - Outputs the schema for each resource
 - Incrementally pulls data based on the input state
 ### Step 1: Create an API client in Shopify Partners:
-1. From your Partner Dashboard, navigate to Settings > Partner API clients, and then click Manage Partner API clients.
+1. From your [Partner Dashboard](https://www.shopify.com/partners), navigate to Settings > Partner API clients, and then click Manage Partner API clients.
 2. Click Create API client.
 3. Enter a name to identify the API client.
 4. Select the appropriate permissions. You can add or remove permissions from a Partner API client as needed.
