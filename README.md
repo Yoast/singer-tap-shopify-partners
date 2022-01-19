@@ -48,6 +48,6 @@ singer-json/bin/pip install target-json
 ```
 Test the tap:
 ```
-singer-shopify-partners/bin/tap-shopify-partners --state state.json -c paypal_config.json | singer-json/bin/target-json >> state_result.json
+singer-shopify-partners/bin/tap-shopify-partners --state state.json -c shopify-partners_config.json | singer-json/bin/target-json >> state_result.json
 ```
 Copyright © 2021 Yoast
