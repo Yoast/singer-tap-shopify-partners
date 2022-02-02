@@ -17,7 +17,7 @@ This tap:
 5. Click Save, and then click Create API client.
 6. In the Credentials section, next to the Access token field, click Show to show the access token, or click Copy to copy the access token to your clipboard.
 ### Step 2: Configure
-Create a file called shopify_partners_config.json in your working directory, following config.json.example. The required parameters are the client_id and secret. The sandbox parameter determines whether to use the sandbox or live environment.
+Create a file called shopify_partners_config.json in your working directory, following config.json.example. The required parameters are the client_id and secret. 
 
 This requires a state.json file to let the tap know from when to retrieve data. For example:
 ```
