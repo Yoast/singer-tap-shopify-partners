@@ -7,9 +7,9 @@ from typing import Callable, Optional
 import singer
 from singer.catalog import Catalog, CatalogEntry
 
-from tap_postmark import tools
-from tap_postmark.postmark import Postmark
-from tap_postmark.streams import STREAMS
+from tap_shopify_partners import tools
+from tap_shopify_partners.shopify_partners import Shopify
+from tap_shopify_partners.streams import STREAMS
 
 LOGGER: logging.RootLogger = singer.get_logger()
 
