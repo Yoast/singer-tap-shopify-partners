@@ -4,6 +4,7 @@ from decimal import Decimal
 from types import MappingProxyType
 from tap_shopify_partners.streams import STREAMS
 from dateutil.parser import parse as parse_d
+from typing import Any, Optional
 
 class ConvertionError(ValueError):
     """Failed to convert value."""
