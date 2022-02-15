@@ -56,7 +56,7 @@ class Shopify(object):  # noqa: WPS230
         Yields:
             Generator[dict] -- Yields Shopify Partners transactions
         """
-        self.logger.info('Stream Shopify Partners Transactions)
+        self.logger.info('Stream Shopify Partners Transactions')
 
         # Validate the start_date value exists
         start_date_input: str = str(kwargs.get('start_date', ''))
