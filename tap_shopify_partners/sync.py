@@ -30,6 +30,7 @@ def sync(
     """
     # For every stream in the catalog
     LOGGER.info('Sync')
+    LOGGER.info('~~~Current state: \n{state}')
     LOGGER.debug('Current state:\n{state}')
 
     # Only selected streams are synced, whether a stream is selected is
@@ -48,7 +49,7 @@ def sync(
         )
 
         LOGGER.debug(f'Stream state: {stream_state}')
-
+        LOGGER. INFO(f'~~~Stream state: {stream_state}')
         # Write the schema
         singer.write_schema(
             stream_name=stream.tap_stream_id,
