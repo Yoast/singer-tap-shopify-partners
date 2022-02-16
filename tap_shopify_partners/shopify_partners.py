@@ -81,7 +81,7 @@ class Shopify(object):  # noqa: WPS230
             f'{API_SCHEME}{API_BASE_URL}{org_id}'
             f'{API_VERSION}{API_PATH_CALL_TYPE}'
         )
-        self.create_headers()
+        self._create_headers()
 
         for date_day in self._start_days_till_now(start_date_input):
             query: str = QUERIES['transactions']
