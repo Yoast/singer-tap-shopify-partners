@@ -100,10 +100,12 @@ def clean_shopify_partners_transactions(
             dict -- cleaned response_data
         """
     # Get the mapping from the STREAMS
+    print('~~~~~~~~~~~~~About to go to mapping')
     mapping: Optional[dict] = STREAMS['shopify_partners_transactions'].get(
         'mapping',
     )
     # Create new cleaned dict
+    print('~~~~~~~~~~~~~~about to go to dict')
     cleaned_data: dict = {
         'id': response_data['node'].get('id'),
         'createdAt': response_data['node'].get('createdAt'),
@@ -115,6 +117,7 @@ def clean_shopify_partners_transactions(
         'shopName': response_data['node']['shop'].get('name'),
         'billingInterval': response_data['node'].get('billingInterval'),
     }
+    print('~~~~~~~~~~~~~~~~~cleaned data below')
     print(cleaned_data)
     return clean_row(cleaned_data, mapping)
 
