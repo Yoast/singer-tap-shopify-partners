@@ -8,6 +8,7 @@ from typing import Generator, Optional, Callable
 
 import httpx
 import singer
+import time
 from dateutil.parser import isoparse
 from dateutil.rrule import DAILY, rrule
 
@@ -93,6 +94,7 @@ class Shopify(object):  # noqa: WPS230
                 headers=self.headers,
                 data=query,
                 )
+            time.sleep(0.3)
 
             # Define cleaner:
             cleaner: Callable = CLEANERS.get('clean_shopify_partners_transactions', {})
