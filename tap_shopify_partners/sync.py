@@ -49,7 +49,7 @@ def sync(
         )
 
         LOGGER.debug(f'Stream state: {stream_state}')
-        LOGGER. INFO(f'~~~Stream state: {stream_state}')
+        LOGGER.info(f'~~~Stream state: {stream_state}')
         # Write the schema
         singer.write_schema(
             stream_name=stream.tap_stream_id,
