@@ -76,7 +76,7 @@ class Shopify(object):  # noqa: WPS230
         kwargs.pop('start_date', None)
 
         # Build URL
-        org_id: str=API_ORG_ID.replace(':organization_id:', organization_id)
+        org_id: str=API_ORG_ID.replace(':organization_id:', self.organization_id)
         url: str = (
             f'{API_SCHEME}{API_BASE_URL}{org_id}'
             f'{API_VERSION}{API_PATH_CALL_TYPE}'
