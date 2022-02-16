@@ -105,7 +105,7 @@ class Shopify(object):  # noqa: WPS230
             # Create dictionary from response
             response_data: dict = response.json()
            #  print(response_data['data']['transactions']['edges'])
-           LOGGER.info('~~~~~~~')
+            LOGGER.info('~~~~~~~')
             LOGGER.info(response_data['data']['transactions']['edges'])
 
             for transaction in response_data['data']['transactions']['edges']:
