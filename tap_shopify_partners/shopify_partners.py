@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone, date
 from types import MappingProxyType
 from typing import Generator, Optional, Callable
 
