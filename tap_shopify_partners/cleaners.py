@@ -115,6 +115,7 @@ def clean_shopify_partners_transactions(
         'shopName': response_data['node']['shop'].get('name'),
         'billingInterval': response_data['node'].get('billingInterval'),
     }
+    print(cleaned_data)
     return clean_row(cleaned_data, mapping)
 
 # Collect all cleaners

@@ -277,8 +277,11 @@ STREAMS: MappingProxyType = MappingProxyType({
             'app': {
                 'map': 'app', 'null': False,
             },
-            'shop': {
-                'map': 'shop', 'null': False,
+            'shopDomain': {
+                'map': 'shop_domain', 'null': False,
+            },
+            'shopName': {
+                'map': 'shop_name', 'null': False,
             },
             'billingInterval': {
                 'map': 'billing_interval', 'null': False,
