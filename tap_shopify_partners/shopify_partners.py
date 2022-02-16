@@ -9,7 +9,7 @@ from typing import Generator, Optional, Callable
 import httpx
 import singer
 from dateutil.parser import isoparse
-from dateutil.rrule import WEEKLY, rrule
+from dateutil.rrule import DAILY, rrule
 
 from tap_shopify_partners.cleaners import CLEANERS
 from tap_shopify_partners.queries import QUERIES
