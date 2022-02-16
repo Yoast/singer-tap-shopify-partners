@@ -30,7 +30,7 @@ def sync(
     """
     # For every stream in the catalog
     LOGGER.info('Sync')
-    LOGGER.info('~~~Current state: \n{state}')
+    LOGGER.info(f'~~~Current state: {state}')
     LOGGER.debug('Current state:\n{state}')
 
     # Only selected streams are synced, whether a stream is selected is
