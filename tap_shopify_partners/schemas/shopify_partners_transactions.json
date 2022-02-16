@@ -1,88 +1,38 @@
 {
-	"selected": true,
-	"type": [
-		"null",
-		"object"
-	],
-	"additionalProperties": false,
-	"properties": {
-		"id": {
-			"type": "string"
-		},
-		"created_at": {
-			"type": "string",
-			"format": "date"
-		},
-		"net_amount": {
-			"type": "array",
-			"additionalProperties": false,
-			"items": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"amount": {
-						"type": "number"
-					}
-				}
-			}
-		},
+    "selected": true,
+    "type": [
+        "null",
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": "string"
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date"
+        },
+        "net_amount": {
+            "type": "number"
+        },
         "gross_amount": {
-			"type": "array",
-			"additionalProperties": false,
-			"items": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"amount": {
-						"type": "number"
-					}
-				}
-			}
-		},
+            "type": "number"
+        },
         "shopify_fee": {
-			"type": "array",
-			"additionalProperties": false,
-			"items": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"amount": {
-						"type": "number"
-					}
-				}
-			}
-		},
+            "type": "number"
+        },
         "app": {
-			"type": "array",
-			"additionalProperties": false,
-			"items": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"name": {
-						"type": "string"
-					}
-				}
-			}
-		},
-        "shop": {
-			"type": "array",
-			"additionalProperties": false,
-			"items": {
-				"type": "object",
-				"additionalProperties": false,
-				"properties": {
-					"myShopifyDomain": {
-						"type": "string"
-					},
-                    "name": {
-                        "type": "string"
-                    }
-				}
-			}
-		},
+            "type": "string"
+        },
+        "shopDomain": {
+            "type": "string"
+        },
+        "shopName": {
+            "type": "string"
+        },
         "billing_interval": {
             "type": "string"
         }
-	}
+    }
 }

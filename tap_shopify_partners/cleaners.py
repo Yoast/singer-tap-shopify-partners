@@ -107,11 +107,12 @@ def clean_shopify_partners_transactions(
     cleaned_data: dict = {
         'id': response_data['node'].get('id'),
         'createdAt': response_data['node'].get('createdAt'),
-        'netAmount': response_data['node'].get('netAmount'),
-        'grossAmount': response_data['node'].get('grossAmount'),
-        'shopifyFee': response_data['node'].get('shopifyFee'),
-        'app': response_data['node'].get('app'),
-        'shop': response_data['node'].get('shop'),
+        'netAmount': response_data['node']['netAmount'].get('amount'),
+        'grossAmount': response_data['node']['grossAmount'].get('amount'),
+        'shopifyFee': response_data['node']['shopifyFee'].get('amount'),
+        'app': response_data['node']['app'].get('name'),
+        'shopDomain': response_data['node']['shop'].get('myshopifyDomain'),
+        'shopName': response_data['node']['shop'].get('name'),
         'billingInterval': response_data['node'].get('billingInterval'),
     }
     return clean_row(cleaned_data, mapping)
