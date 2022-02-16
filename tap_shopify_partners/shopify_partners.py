@@ -105,12 +105,14 @@ class Shopify(object):  # noqa: WPS230
             # Create dictionary from response
             response_data: dict = response.json()
 
-            yield from (
-                cleaner(date_day, transaction)
-                for transaction in response_data['data']['transactions']['edges']
-            )
+            for transaction in response_data['data']['transactions']['edges']:
+                yield cleaner(date_day, transaction)
+
+            # yield from (
+            #     cleaner(date_day, response_data)
+            #     #for transaction in response_data['data']['transactions']['edges']
+            # )
         
-            # TODO: call cleaners with yield (check how other cleaners are called, and where. not sure if it is this line or line 98 above)
 
         self.logger.info('Finished: shopify_partners_transactions')
 
