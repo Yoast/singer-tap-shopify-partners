@@ -107,15 +107,24 @@ def clean_shopify_partners_transactions(
     # Create new cleaned dict
     print('~~~~~~~~~~~~~~about to go to dict')
     cleaned_data: dict = {
-        'id': response_data['node'].get('id'),
-        'createdAt': response_data['node'].get('createdAt'),
-        'netAmount': response_data['node']['netAmount'].get('amount'),
-        'grossAmount': response_data['node']['grossAmount'].get('amount'),
-        'shopifyFee': response_data['node']['shopifyFee'].get('amount'),
-        'app': response_data['node']['app'].get('name'),
-        'shopDomain': response_data['node']['shop'].get('myshopifyDomain'),
-        'shopName': response_data['node']['shop'].get('name'),
-        'billingInterval': response_data['node'].get('billingInterval'),
+        # 'id': response_data['node.id'].get('id'),
+        # 'createdAt': response_data['node.createdAt'].get('createdAt'),
+        # 'netAmount': response_data['node.netAmount.amount']['netAmount'].get('amount'),
+        # 'grossAmount': response_data['node.grossAmount.amount']['grossAmount'].get('amount'),
+        # 'shopifyFee': response_data['node.shopifyFee.amount']['shopifyFee'].get('amount'),
+        # 'app': response_data['node.app.name']['app'].get('name'),
+        # 'shopDomain': response_data['node.shop.myshopifyDomain']['shop'].get('myshopifyDomain'),
+        # 'shopName': response_data['node.shop.name']['shop'].get('name'),
+        # 'billingInterval': response_data['node.billingInterval'].get('billingInterval'),
+        'id': response_data['node.id'],
+        'createdAt': response_data['node.createdAt'],
+        'netAmount': response_data['node.netAmount.amount'],
+        'grossAmount': response_data['node.grossAmount.amount'],
+        'shopifyFee': response_data['node.shopifyFee.amount'],
+        'app': response_data['node.app.name'],
+        'shopDomain': response_data['node.shop.myshopifyDomain'],
+        'shopName': response_data['node.shop.name'],
+        'billingInterval': response_data['node.billingInterval'],
     }
     print('~~~~~~~~~~~~~~~~~cleaned data below')
     print(cleaned_data)
