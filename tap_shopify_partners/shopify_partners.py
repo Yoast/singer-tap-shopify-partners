@@ -139,9 +139,13 @@ class Shopify(object):  # noqa: WPS230
             # yield cleaner(date_day, transactions)
 
             for transaction in response_data['data']['transactions']['edges']:
-                self.logger.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+                self.logger.info('`````````````````````````````````````````')
+                self.logger.info('Before flattening:')
                 self.logger.info(transaction)
+                self.logger.info('After flattening:')
                 temp_transaction = self.flatten(transaction)
+                self.logger.info('Object type:')
+                self.logger.info(type(temp_transaction))
                 self.logger.info(temp_transaction)
                 yield cleaner(date_day, temp_transaction)
 
