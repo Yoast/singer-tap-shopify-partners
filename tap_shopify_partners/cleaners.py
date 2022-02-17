@@ -107,15 +107,15 @@ def clean_shopify_partners_transactions(
     # Create new cleaned dict
     print('~~~~~~~~~~~~~~about to go to dict')
     cleaned_data: dict = {
-        'id': response_data['data']['transactions']['edges']['node'].get('id'),
-        'createdAt': response_data['data']['transactions']['edges']['node'].get('createdAt'),
-        'netAmount': response_data['data']['transactions']['edges']['node']['netAmount'].get('amount'),
-        'grossAmount': response_data['data']['transactions']['edges']['node']['grossAmount'].get('amount'),
-        'shopifyFee': response_data['data']['transactions']['edges']['node']['shopifyFee'].get('amount'),
-        'app': response_data['data']['transactions']['edges']['node']['app'].get('name'),
-        'shopDomain': response_data['data']['transactions']['edges']['node']['shop'].get('myshopifyDomain'),
-        'shopName': response_data['data']['transactions']['edges']['node']['shop'].get('name'),
-        'billingInterval': response_data['data']['transactions']['edges']['node'].get('billingInterval'),
+        'id': response_data['node'].get('id'),
+        'createdAt': response_data['node'].get('createdAt'),
+        'netAmount': response_data['node']['netAmount'].get('amount'),
+        'grossAmount': response_data['node']['grossAmount'].get('amount'),
+        'shopifyFee': response_data['node']['shopifyFee'].get('amount'),
+        'app': response_data['node']['app'].get('name'),
+        'shopDomain': response_data['node']['shop'].get('myshopifyDomain'),
+        'shopName': response_data['node']['shop'].get('name'),
+        'billingInterval': response_data['node'].get('billingInterval'),
     }
     print('~~~~~~~~~~~~~~~~~cleaned data below')
     print(cleaned_data)
