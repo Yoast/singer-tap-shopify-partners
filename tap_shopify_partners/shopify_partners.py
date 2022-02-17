@@ -46,29 +46,29 @@ class Shopify(object):  # noqa: WPS230
         self.logger: logging.Logger = singer.get_logger()
         self.client: httpx.Client = httpx.Client(http2=True)
 
-    def flatten(
-        self,
-        dictionary, 
-        parent_key=False, 
-        separator='.'):
-        """
-        Turn a nested dictionary into a flattened dictionary
-        :param dictionary: The dictionary to flatten
-        :param parent_key: The string to prepend to dictionary's keys
-        :param separator: The string used to separate flattened keys
-        :return: A flattened dictionary
-        """
-        items = []
-        for key, value in dictionary.items():
-            new_key = str(parent_key) + separator + key if parent_key else key
-            if isinstance(value, collections.MutableMapping):
-                items.extend(self.flatten(value, new_key, separator).items())
-            elif isinstance(value, list):
-                for k, v in enumerate(value):
-                    items.extend(self.flatten({str(k): v}, new_key).items())
-            else:
-                items.append((new_key, value))
-        return dict(items)
+    # def flatten(
+    #     self,
+    #     dictionary, 
+    #     parent_key=False, 
+    #     separator='.'):
+    #     """
+    #     Turn a nested dictionary into a flattened dictionary
+    #     :param dictionary: The dictionary to flatten
+    #     :param parent_key: The string to prepend to dictionary's keys
+    #     :param separator: The string used to separate flattened keys
+    #     :return: A flattened dictionary
+    #     """
+    #     items = []
+    #     for key, value in dictionary.items():
+    #         new_key = str(parent_key) + separator + key if parent_key else key
+    #         if isinstance(value, collections.MutableMapping):
+    #             items.extend(self.flatten(value, new_key, separator).items())
+    #         elif isinstance(value, list):
+    #             for k, v in enumerate(value):
+    #                 items.extend(self.flatten({str(k): v}, new_key).items())
+    #         else:
+    #             items.append((new_key, value))
+    #     return dict(items)
 
     def shopify_partners_transactions(  # noqa: WPS210, WPS213
         self,
@@ -132,22 +132,22 @@ class Shopify(object):  # noqa: WPS230
             # transactions: List[dict] = response_data['data']['transactions']['edges']
             # transactions: List[dict] = response_data.get('edges', [])
            #  print(response_data['data']['transactions']['edges'])
-            self.logger.info('~~~~~~~')
+            # self.logger.info('~~~~~~~')
             # self.logger.info(transactions)
-            self.logger.info(response_data)
+            # self.logger.info(response_data)
 
             # yield cleaner(date_day, transactions)
 
-            for transaction in response_data['data']['transactions']['edges']:
-                self.logger.info('`````````````````````````````````````````')
-                self.logger.info('Before flattening:')
-                self.logger.info(transaction)
-                temp_transaction = self.flatten(transaction)
-                self.logger.info('After flattening:')
-                self.logger.info(temp_transaction)
-                self.logger.info('Object type:')
-                self.logger.info(type(temp_transaction))
-                yield cleaner(date_day, temp_transaction)
+            # for transaction in response_data['data']['transactions']['edges']:
+            #     self.logger.info('`````````````````````````````````````````')
+            #     self.logger.info('Before flattening:')
+            #     self.logger.info(transaction)
+            #     temp_transaction = self.flatten(transaction)
+            #     self.logger.info('After flattening:')
+            #     self.logger.info(temp_transaction)
+            #     self.logger.info('Object type:')
+            #     self.logger.info(type(temp_transaction))
+            #     yield cleaner(date_day, temp_transaction)
 
             # for transaction in response_data:
             #     self.logger.info(transaction)
@@ -157,7 +157,7 @@ class Shopify(object):  # noqa: WPS230
             #    cleaner(date_day, response_data)
                 #for transaction in response_data['data']['transactions']['edges']
             #)
-        
+            yield from cleaner(date_day, response_data)
 
         self.logger.info('Finished: shopify_partners_transactions')
 

@@ -86,6 +86,28 @@ def clean_row(row: dict, mapping: dict) -> dict:
         )
 
     return cleaned
+def flatten(
+        dictionary, 
+        parent_key=False, 
+        separator='.'):
+        """
+        Turn a nested dictionary into a flattened dictionary
+        :param dictionary: The dictionary to flatten
+        :param parent_key: The string to prepend to dictionary's keys
+        :param separator: The string used to separate flattened keys
+        :return: A flattened dictionary
+        """
+        items = []
+        for key, value in dictionary.items():
+            new_key = str(parent_key) + separator + key if parent_key else key
+            if isinstance(value, collections.MutableMapping):
+                items.extend(flatten(value, new_key, separator).items())
+            elif isinstance(value, list):
+                for k, v in enumerate(value):
+                    items.extend(flatten({str(k): v}, new_key).items())
+            else:
+                items.append((new_key, value))
+        return dict(items)
 
 def clean_shopify_partners_transactions(
     date_day: str,
@@ -104,31 +126,38 @@ def clean_shopify_partners_transactions(
     mapping: Optional[dict] = STREAMS['shopify_partners_transactions'].get(
         'mapping',
     )
-    # Create new cleaned dict
-    print('~~~~~~~~~~~~~~about to go to dict')
-    cleaned_data: dict = {
-        # 'id': response_data['node.id'].get('id'),
-        # 'createdAt': response_data['node.createdAt'].get('createdAt'),
-        # 'netAmount': response_data['node.netAmount.amount']['netAmount'].get('amount'),
-        # 'grossAmount': response_data['node.grossAmount.amount']['grossAmount'].get('amount'),
-        # 'shopifyFee': response_data['node.shopifyFee.amount']['shopifyFee'].get('amount'),
-        # 'app': response_data['node.app.name']['app'].get('name'),
-        # 'shopDomain': response_data['node.shop.myshopifyDomain']['shop'].get('myshopifyDomain'),
-        # 'shopName': response_data['node.shop.name']['shop'].get('name'),
-        # 'billingInterval': response_data['node.billingInterval'].get('billingInterval'),
-        'id': response_data['node.id'],
-        'createdAt': response_data['node.createdAt'],
-        'netAmount': response_data['node.netAmount.amount'],
-        'grossAmount': response_data['node.grossAmount.amount'],
-        'shopifyFee': response_data['node.shopifyFee.amount'],
-        'app': response_data['node.app.name'],
-        'shopDomain': response_data['node.shop.myshopifyDomain'],
-        'shopName': response_data['node.shop.name'],
-        'billingInterval': response_data['node.billingInterval'],
-    }
-    print('~~~~~~~~~~~~~~~~~cleaned data below')
-    print(cleaned_data)
-    return clean_row(cleaned_data, mapping)
+
+    new_records: list = []
+
+    for transaction in response_data['data']['transactions']['edges']:
+        transaction_flat = flatten(transaction)
+
+        # transaction_flat = flatten(response_data['data']['transactions']['edges'])
+        # Create new cleaned dict
+        print('~~~~~~~~~~~~~~about to go to dict')
+        cleaned_data: dict = {
+            # 'id': response_data['node.id'].get('id'),
+            # 'createdAt': response_data['node.createdAt'].get('createdAt'),
+            # 'netAmount': response_data['node.netAmount.amount']['netAmount'].get('amount'),
+            # 'grossAmount': response_data['node.grossAmount.amount']['grossAmount'].get('amount'),
+            # 'shopifyFee': response_data['node.shopifyFee.amount']['shopifyFee'].get('amount'),
+            # 'app': response_data['node.app.name']['app'].get('name'),
+            # 'shopDomain': response_data['node.shop.myshopifyDomain']['shop'].get('myshopifyDomain'),
+            # 'shopName': response_data['node.shop.name']['shop'].get('name'),
+            # 'billingInterval': response_data['node.billingInterval'].get('billingInterval'),
+            'id': transaction_flat['node.id'],
+            'createdAt': transaction_flat['node.createdAt'],
+            'netAmount': transaction_flat['node.netAmount.amount'],
+            'grossAmount': transaction_flat['node.grossAmount.amount'],
+            'shopifyFee': transaction_flat['node.shopifyFee.amount'],
+            'app': transaction_flat['node.app.name'],
+            'shopDomain': transaction_flat['node.shop.myshopifyDomain'],
+            'shopName': transaction_flat['node.shop.name'],
+            'billingInterval': transaction_flat['node.billingInterval'],
+        }
+        new_records.append(cleaned_data)
+    # return clean_row(cleaned_data, mapping)
+    return[clean_row(cleaned_data, mapping) for record in new_records]
 
 # Collect all cleaners
 CLEANERS: MappingProxyType = MappingProxyType({
