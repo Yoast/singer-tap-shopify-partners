@@ -106,7 +106,7 @@ class Shopify(object):  # noqa: WPS230
             response_data: dict = response.json()
             # transactions: List[dict] = response_data['data']['transactions']['edges']
             # transactions: List[dict] = response_data['data']['transactions']['edges']
-            transactions: List[dict] = response_data.get('node', [])
+            transactions: List[dict] = response_data.get('edge', [])
            #  print(response_data['data']['transactions']['edges'])
             self.logger.info('~~~~~~~')
             self.logger.info(transactions)
