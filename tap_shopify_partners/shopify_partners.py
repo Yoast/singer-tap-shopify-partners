@@ -46,7 +46,11 @@ class Shopify(object):  # noqa: WPS230
         self.logger: logging.Logger = singer.get_logger()
         self.client: httpx.Client = httpx.Client(http2=True)
 
-    def flatten(dictionary, parent_key=False, separator='.'):
+    def flatten(
+        self,
+        dictionary, 
+        parent_key=False, 
+        separator='.'):
         """
         Turn a nested dictionary into a flattened dictionary
         :param dictionary: The dictionary to flatten
