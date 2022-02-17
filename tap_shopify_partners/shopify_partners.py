@@ -108,7 +108,8 @@ class Shopify(object):  # noqa: WPS230
             # transactions: List[dict] = response_data.get('edges', [])
            #  print(response_data['data']['transactions']['edges'])
             self.logger.info('~~~~~~~')
-            self.logger.info(transactions)
+            # self.logger.info(transactions)
+            self.logger.info(response_data)
 
             # yield cleaner(date_day, transactions)
 
