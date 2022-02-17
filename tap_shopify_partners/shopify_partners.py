@@ -47,13 +47,13 @@ class Shopify(object):  # noqa: WPS230
         self.client: httpx.Client = httpx.Client(http2=True)
 
     def flatten(dictionary, parent_key=False, separator='.'):
-    """
-    Turn a nested dictionary into a flattened dictionary
-    :param dictionary: The dictionary to flatten
-    :param parent_key: The string to prepend to dictionary's keys
-    :param separator: The string used to separate flattened keys
-    :return: A flattened dictionary
-    """
+        """
+        Turn a nested dictionary into a flattened dictionary
+        :param dictionary: The dictionary to flatten
+        :param parent_key: The string to prepend to dictionary's keys
+        :param separator: The string used to separate flattened keys
+        :return: A flattened dictionary
+        """
         items = []
         for key, value in dictionary.items():
             new_key = str(parent_key) + separator + key if parent_key else key
