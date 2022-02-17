@@ -9,6 +9,7 @@ from typing import Generator, Optional, Callable
 import httpx
 import singer
 import time
+import collections
 from dateutil.parser import isoparse
 from dateutil.rrule import DAILY, rrule
 
@@ -44,6 +45,26 @@ class Shopify(object):  # noqa: WPS230
         self.shopify_partners_access_token: str = shopify_partners_access_token
         self.logger: logging.Logger = singer.get_logger()
         self.client: httpx.Client = httpx.Client(http2=True)
+
+    def flatten(dictionary, parent_key=False, separator='.'):
+    """
+    Turn a nested dictionary into a flattened dictionary
+    :param dictionary: The dictionary to flatten
+    :param parent_key: The string to prepend to dictionary's keys
+    :param separator: The string used to separate flattened keys
+    :return: A flattened dictionary
+    """
+        items = []
+        for key, value in dictionary.items():
+            new_key = str(parent_key) + separator + key if parent_key else key
+            if isinstance(value, collections.MutableMapping):
+                items.extend(flatten(value, new_key, separator).items())
+            elif isinstance(value, list):
+                for k, v in enumerate(value):
+                    items.extend(flatten({str(k): v}, new_key).items())
+            else:
+                items.append((new_key, value))
+        return dict(items)
 
     def shopify_partners_transactions(  # noqa: WPS210, WPS213
         self,
@@ -116,7 +137,7 @@ class Shopify(object):  # noqa: WPS230
             for transaction in response_data['data']['transactions']['edges']:
                 self.logger.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
                 self.logger.info(transaction)
-                yield cleaner(date_day, transaction)
+                yield cleaner(date_day, flatten(transaction))
 
             # for transaction in response_data:
             #     self.logger.info(transaction)
