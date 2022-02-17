@@ -105,8 +105,7 @@ class Shopify(object):  # noqa: WPS230
             # Create dictionary from response
             response_data: dict = response.json()
             # transactions: List[dict] = response_data['data']['transactions']['edges']
-            # transactions: List[dict] = response_data['data']['transactions']['edges']
-            transactions: List[dict] = response_data.get('edges', [])
+            # transactions: List[dict] = response_data.get('edges', [])
            #  print(response_data['data']['transactions']['edges'])
             self.logger.info('~~~~~~~')
             self.logger.info(transactions)
@@ -117,7 +116,7 @@ class Shopify(object):  # noqa: WPS230
             #     self.logger.info(value)
             #     yield cleaner(date_day, value)
 
-            for transaction in transactions:
+            for transaction in response_data:
                 self.logger.info(transaction)
                 yield cleaner(date_day, transaction)
 
