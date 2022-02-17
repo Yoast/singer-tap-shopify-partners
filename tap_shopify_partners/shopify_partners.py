@@ -113,13 +113,13 @@ class Shopify(object):  # noqa: WPS230
 
             # yield cleaner(date_day, transactions)
 
-            # for key, value in transactions.items():
-            #     self.logger.info(value)
-            #     yield cleaner(date_day, value)
+            for key, value in response_data.items():
+                self.logger.info(value)
+                yield cleaner(date_day, value)
 
-            for transaction in response_data:
-                self.logger.info(transaction)
-                yield cleaner(date_day, transaction)
+            # for transaction in response_data:
+            #     self.logger.info(transaction)
+            #     yield cleaner(date_day, transaction)
 
             # yield from (
             #    cleaner(date_day, response_data)
