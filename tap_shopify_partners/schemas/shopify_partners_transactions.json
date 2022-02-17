@@ -25,10 +25,10 @@
         "app": {
             "type": "string"
         },
-        "shopDomain": {
+        "shop_domain": {
             "type": "string"
         },
-        "shopName": {
+        "shop_name": {
             "type": "string"
         },
         "billing_interval": {

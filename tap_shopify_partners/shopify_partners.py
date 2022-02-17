@@ -109,16 +109,16 @@ class Shopify(object):  # noqa: WPS230
             self.logger.info('~~~~~~~')
             self.logger.info(transactions)
 
-            yield cleaner(date_day, transactions)
+            # yield cleaner(date_day, transactions)
 
-            # for transaction in transactions:
-            #     self.logger.info(transaction)
-            #     yield cleaner(date_day, transaction)
+            for key, value in transactions.items():
+                self.logger.info(value)
+                yield cleaner(date_day, value)
 
             # yield from (
-            #     cleaner(date_day, response_data)
-            #     #for transaction in response_data['data']['transactions']['edges']
-            # )
+            #    cleaner(date_day, response_data)
+                #for transaction in response_data['data']['transactions']['edges']
+            #)
         
 
         self.logger.info('Finished: shopify_partners_transactions')
