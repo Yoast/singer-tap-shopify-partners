@@ -78,6 +78,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         state {dict} -- State
     """
     # Retrieve the value of the bookmark
+    LOGGER.info(f'`````````Logging row:`````````' {row})
     bookmark: Optional[str] = tools.retrieve_bookmark_with_path(
         stream.replication_key,
         row,
