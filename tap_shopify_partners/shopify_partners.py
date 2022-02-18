@@ -143,9 +143,9 @@ class Shopify(object):  # noqa: WPS230
             # yield cleaner(date_day, transactions)
             self.logger.info('==========About to enter the transaction for loop (shopify_partners.py->shopify_partners_transactions')
             for transaction in response_data['data']['transactions']['edges']:
-                self.logger.info('`````````````````````````````````````````')
-                self.logger.info('Before flattening:')
-                self.logger.info(transaction)
+                # self.logger.info('`````````````````````````````````````````')
+                # self.logger.info('Before flattening:')
+                # self.logger.info(transaction)
                 temp_transaction = self.flatten(transaction)
                 self.logger.info('After flattening:')
                 self.logger.info(temp_transaction)

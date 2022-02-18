@@ -77,6 +77,6 @@ def create_bookmark(stream_name: str, bookmark_value: str) -> str:
         # Return tomorrow's date
         tomorrow: date = datetime.strptime(
             bookmark_value,
-            '%Y-%m-%dT%H:%M:%SZ',
+            '%Y-%m-%dT%H:%M:%fZ',
         ).date() + timedelta(days=1)
         return tomorrow.isoformat()
