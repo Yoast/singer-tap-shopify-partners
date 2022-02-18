@@ -122,7 +122,7 @@ class Shopify(object):  # noqa: WPS230
             time.sleep(0.3)
 
             # Define cleaner:
-            cleaner: Callable = CLEANERS.get('shopify_partners_transactions', {})
+            cleaner: Callable = CLEANERS.get('shopify_partners_transactions')
 
             # Raise error on 4xx and 5xxx
             response.raise_for_status()
