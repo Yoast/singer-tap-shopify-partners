@@ -136,15 +136,15 @@ def clean_shopify_partners_transactions(
         # Create new cleaned dict
         print('~~~~~~~~~~~~~~about to go to dict')
         cleaned_data: dict = {
-            # 'id': response_data['node.id'].get('id'),
-            # 'createdAt': response_data['node.createdAt'].get('createdAt'),
-            # 'netAmount': response_data['node.netAmount.amount']['netAmount'].get('amount'),
-            # 'grossAmount': response_data['node.grossAmount.amount']['grossAmount'].get('amount'),
-            # 'shopifyFee': response_data['node.shopifyFee.amount']['shopifyFee'].get('amount'),
-            # 'app': response_data['node.app.name']['app'].get('name'),
-            # 'shopDomain': response_data['node.shop.myshopifyDomain']['shop'].get('myshopifyDomain'),
-            # 'shopName': response_data['node.shop.name']['shop'].get('name'),
-            # 'billingInterval': response_data['node.billingInterval'].get('billingInterval'),
+            # 'id': response_data['node'].get('id'),
+            # 'createdAt': response_data['node'].get('createdAt'),
+            # 'netAmount': response_data['node']['netAmount'].get('amount'),
+            # 'grossAmount': response_data['node']['grossAmount'].get('amount'),
+            # 'shopifyFee': response_data['node']['shopifyFee'].get('amount'),
+            # 'app': response_data['node']['app'].get('name'),
+            # 'shopDomain': response_data['node']['shop'].get('myshopifyDomain'),
+            # 'shopName': response_data['node']['shop'].get('name'),
+            # 'billingInterval': response_data['node'].get('billingInterval'),
             'id': transaction_flat['node.id'],
             'createdAt': transaction_flat['node.createdAt'],
             'netAmount': transaction_flat['node.netAmount.amount'],
@@ -157,7 +157,7 @@ def clean_shopify_partners_transactions(
         }
         new_records.append(cleaned_data)
     # return clean_row(cleaned_data, mapping)
-    return[clean_row(cleaned_data, mapping) for record in new_records]
+    return[clean_row(new_record, mapping) for record in new_records]
 
 # Collect all cleaners
 CLEANERS: MappingProxyType = MappingProxyType({
