@@ -14,16 +14,13 @@
             "format": "date-time"
         },
         "net_amount": {
-            "type": "number",
-            "format": "integer"
+            "type": "number"
         },
         "gross_amount": {
-            "type": "number",
-            "format": "integer"
+            "type": "number"
         },
         "shopify_fee": {
-            "type": "number",
-            "format": "integer"
+            "type": "number"
         },
         "app": {
             "type": "string"
