@@ -157,7 +157,8 @@ class Shopify(object):  # noqa: WPS230
             #    cleaner(date_day, response_data)
                 #for transaction in response_data['data']['transactions']['edges']
             #)
-            yield from cleaner([date_day, response_data])
+            # yield from cleaner(date_day, response_data)
+            return cleaner(date_day, response_data)
 
         self.logger.info('Finished: shopify_partners_transactions')
 
