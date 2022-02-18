@@ -86,6 +86,7 @@ def clean_row(row: dict, mapping: dict) -> dict:
         )
 
     return cleaned
+    
 def flatten(
         dictionary, 
         parent_key=False, 
