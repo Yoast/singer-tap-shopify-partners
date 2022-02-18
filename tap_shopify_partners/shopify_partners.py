@@ -200,6 +200,6 @@ class Shopify(object):  # noqa: WPS230
         )
 
         # Yield dates in YYYY-MM-DD format
-        yield from (date_day.strftime('%Y-%m-%dT%H:%M:%SZ') for date_day in dates)
+        yield from (date_day.strftime('%Y-%m-%d') for date_day in dates)
 
 
