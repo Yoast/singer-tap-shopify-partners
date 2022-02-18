@@ -122,7 +122,7 @@ class Shopify(object):  # noqa: WPS230
             time.sleep(0.3)
 
             # Define cleaner:
-            cleaner: Callable = CLEANERS.get('clean_shopify_partners_transactions', {})
+            cleaner: Callable = CLEANERS.get('shopify_partners_transactions', {})
 
             # Raise error on 4xx and 5xxx
             response.raise_for_status()
@@ -157,8 +157,8 @@ class Shopify(object):  # noqa: WPS230
             #    cleaner(date_day, response_data)
                 #for transaction in response_data['data']['transactions']['edges']
             #)
-            # yield from cleaner(date_day, response_data)
-            return cleaner(date_day, response_data)
+            yield from cleaner(date_day, response_data)
+            # return cleaner(date_day, response_data)
 
         self.logger.info('Finished: shopify_partners_transactions')
 
