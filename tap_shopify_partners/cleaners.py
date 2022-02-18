@@ -5,6 +5,7 @@ from types import MappingProxyType
 from tap_shopify_partners.streams import STREAMS
 from dateutil.parser import parse as parse_d
 from typing import Any, Optional
+import collections
 
 class ConvertionError(ValueError):
     """Failed to convert value."""
@@ -86,7 +87,7 @@ def clean_row(row: dict, mapping: dict) -> dict:
         )
 
     return cleaned
-    
+
 def flatten(
         dictionary, 
         parent_key=False, 
