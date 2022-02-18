@@ -131,7 +131,7 @@ def clean_shopify_partners_transactions(
 
     new_records: list = []
     print(response_data)
-    for transaction in response_data['data']['transactions']['edges']:
+    for transaction in response_data["data"]["transactions"]["edges"]:
         transaction_flat = flatten(transaction)
 
         # transaction_flat = flatten(response_data['data']['transactions']['edges'])
