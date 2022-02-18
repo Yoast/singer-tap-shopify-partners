@@ -111,13 +111,13 @@ class Shopify(object):  # noqa: WPS230
 
         self.logger.info('````````````````````About to enter date for loop (shopify_partners.py')
         for date_day in self._start_days_till_now(start_date_input):
-            self.logger.info(f'~~~~~~~Inside the date for loop and currently looking at {date_day} (shopify_partners.py')
+            self.logger.info(f'~~~~~~~Inside the date for loop and currently looking at {date_day} (shopify_partners.py)')
             query: str = QUERIES['transactions']
             # Replace dates in placeholders
-            # query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
-            query = query.replace(':fromdate:', date_day)
-            #query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
-            query = query.replace(':todate:', date_day)
+            query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+            # query = query.replace(':fromdate:', date_day)
+            query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
+            # query = query.replace(':todate:', date_day)
             response: httpx._models.Response = self.client.post(  # noqa
                 url,
                 headers=self.headers,
