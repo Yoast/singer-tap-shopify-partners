@@ -138,7 +138,7 @@ class Shopify(object):  # noqa: WPS230
            #  print(response_data['data']['transactions']['edges'])
             # self.logger.info('~~~~~~~')
             # self.logger.info(transactions)
-            # self.logger.info(f'|||||||||||||||||| Response data: {response_data}')
+            self.logger.info(f'|||||||||||||||||| Response data: {response_data}')
 
             # yield cleaner(date_day, transactions)
             self.logger.info('==========About to enter the transaction for loop (shopify_partners.py->shopify_partners_transactions')
