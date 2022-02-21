@@ -150,12 +150,21 @@ def clean_shopify_partners_transactions(
         "id": response_data["node.id"],
         "createdAt": response_data["node.createdAt"],
         "netAmount": float(response_data["node.netAmount.amount"]),
+        "netAmountCurrencyCode": response_data["node.netAmount.currencyCode"],
         "grossAmount": float(response_data["node.grossAmount.amount"]),
+        "grossAmountCurrencyCode": response_data["node.grossAmount.currencyCode"],
         "shopifyFee": float(response_data["node.shopifyFee.amount"]),
+        "shopifyFeeCurrencyCode": response_data["node.shopifyFee.currencyCode"],
         "app": response_data["node.app.name"],
         "shopDomain": response_data["node.shop.myshopifyDomain"],
         "shopName": response_data["node.shop.name"],
+        "shopId": response_data["node.shop.id"],
         "billingInterval": response_data["node.billingInterval"],
+        "chargeId": response_data["node.chargeId"],
+        "processingFee": float(response_data["node.processingFee.amount"]),
+        "processingFeeCurrencyCode": response_data["node.processingFee.currencyCode"],
+        "regulatoryOperatingFee": float(response_data["node.regulatoryOperatingFee"]),
+        "regulatoryOperatingFeeCurrencyCode": response_data["node.regulatoryOperationgFee.currencyCode"]
     }
         # print("~~~~~~~~~~~Cleaned data (cleaners.py)")
         # print(cleaned_data)

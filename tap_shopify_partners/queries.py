@@ -14,12 +14,15 @@ query {
         ... on AppSubscriptionSale {
           netAmount {
             amount
+            currencyCode
           }
           grossAmount{
             amount
+            currencyCode
           }
           shopifyFee{
             amount
+            currencyCode
           }
           app {
             name
@@ -27,8 +30,18 @@ query {
           shop {
             myshopifyDomain
             name
+            id
           }
-          billingInterval 
+          billingInterval
+          chargeId
+          processingFee{
+            amount
+            currencyCode
+          }
+          regulatoryOperatingFee{
+            amount
+            currencyCode
+          } 
         }
       }
     }

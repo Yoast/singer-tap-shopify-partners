@@ -268,11 +268,20 @@ STREAMS: MappingProxyType = MappingProxyType({
             'netAmount': {
                 'map': 'net_amount', 'null': False,
             },
+            'netAmountCurrencyCode': {
+                'map': 'net_amount_currency_code', 'null': False,
+            }
             'grossAmount': {
                 'map': 'gross_amount', 'null': False,
             },
+             'grossAmountCurrencyCode': {
+                'map': 'gross_amount_currency_code', 'null': False,
+            },
             'shopifyFee': {
                 'map': 'shopify_fee', 'null': False,
+            },
+            'shopifyFeeCurrencyCode': {
+                'map': 'shopify_fee_currency_code', 'null': False,
             },
             'app': {
                 'map': 'app', 'null': False,
@@ -283,9 +292,27 @@ STREAMS: MappingProxyType = MappingProxyType({
             'shopName': {
                 'map': 'shop_name', 'null': False,
             },
+            'shopId': {
+                'map': 'shop_id', 'null': False,
+            },
             'billingInterval': {
                 'map': 'billing_interval', 'null': False,
-            },   
+            }, 
+            'chargeId': {
+                'map': 'charge_id', 'null': False,
+            },
+            'processingFee': {
+                'map': 'processing_fee', 'null': False,
+            },
+            'processingFeeCurrencyCode': {
+                'map': 'processing_fee_currency_code', 'null': False,
+            },
+            'regulatoryOperatingFee': {
+                'map': 'regulatory_operating_fee', 'null': False,
+            },
+            'regulatoryOperatingFeeCurrencyCode': {
+                'map': 'regulatory_operating_fee_currency_code', 'null': False,
+            },  
         }
     }
 })

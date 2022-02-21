@@ -16,11 +16,20 @@
         "net_amount": {
             "type": "number"
         },
+        "net_amount_currency_code": {
+            "type": "string"
+        },
         "gross_amount": {
             "type": "number"
         },
+        "gross_amount_currency_code": {
+            "type": "string"
+        },
         "shopify_fee": {
             "type": "number"
+        },
+        "shopify_fee_currency_code": {
+            "type": "string"
         },
         "app": {
             "type": "string"
@@ -31,7 +40,25 @@
         "shop_name": {
             "type": "string"
         },
+        "shop_id": {
+            "type": "string"
+        },
         "billing_interval": {
+            "type": "string"
+        },
+        "charge_id": {
+            "type": "string"
+        },
+        "processing_fee": {
+            "type": "number"
+        },
+        "processing_fee_currency_code": {
+            "type": "string"
+        },
+        "regulatory_operating_fee": {
+            "type": "number"
+        },
+        "regulatory_operating_fee_currency_code": {
             "type": "string"
         }
     }
