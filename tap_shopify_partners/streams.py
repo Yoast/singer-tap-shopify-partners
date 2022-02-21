@@ -270,7 +270,7 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
             'netAmountCurrencyCode': {
                 'map': 'net_amount_currency_code', 'null': False,
-            }
+            },
             'grossAmount': {
                 'map': 'gross_amount', 'null': False,
             },
