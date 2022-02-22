@@ -357,7 +357,7 @@ STREAMS: MappingProxyType = MappingProxyType({
         }
     },
     'shopify_partners_app_credit': {
-        'key_properties': 'id',
+        'key_properties': 'shop_id',
         'replication_method': 'INCREMENTAL',
         'replication_key': 'occured_at',
         'bookmark': 'start_date',
@@ -401,7 +401,7 @@ STREAMS: MappingProxyType = MappingProxyType({
         }
     },
     'shopify_partners_app_relationship': {
-        'key_properties': 'id',
+        'key_properties': 'shop_id',
         'replication_method': 'INCREMENTAL',
         'replication_key': 'occured_at',
         'bookmark': 'start_date',
