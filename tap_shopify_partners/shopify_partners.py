@@ -217,6 +217,8 @@ class Shopify(object):  # noqa: WPS230
         # Validate the start_date value exists
         start_date_input: str = str(kwargs.get('start_date', ''))
         self.logger.info(f'``````````Start date: {start_date_input}')
+        test_date = isoparse(start_date_input)
+        self.logger.info(f'``````````After isoparse: {test_date}')
         if not start_date_input:
             raise ValueError('The parameter start_date is required.')
 
