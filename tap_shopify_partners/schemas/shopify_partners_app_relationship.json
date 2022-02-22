@@ -1,0 +1,44 @@
+{
+    "selected": true,
+    "type": [
+        "null",
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "app": {
+            "type": "string"
+        },
+        "app_id": {
+            "type": "string"
+        },
+        "occured_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "shop_domain": {
+            "type": "string"
+        },
+        "shop_name": {
+            "type": "string"
+        },
+        "shop_id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        },
+        "description": {
+            "type": [
+				"null",
+				"string"
+			]
+        },
+        "reason": {
+            "type": [
+				"null",
+				"string"
+			]
+        }
+    }
+}

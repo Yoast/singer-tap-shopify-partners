@@ -184,8 +184,76 @@ def clean_shopify_partners_app_sale_adjustment(
 
     return clean_row(cleaned_data, mapping)
 
+def clean_shopify_partners_app_credit(
+    date_day: str,
+    response_data: dict,
+) -> dict:
+    """Clean shopify_partners_app_credit data.
+
+        Arguments:
+            response_data {dict} -- input response_data
+
+        Returns:
+            dict -- cleaned response_data
+        """
+    # Get the mapping from the STREAMS
+    mapping: Optional[dict] = STREAMS['shopify_partners_app_credits].get(
+        'mapping',
+    )
+
+    cleaned_data: dict = {
+        "app": response_data["node.app.name"],
+        "appId": response_data["node.app.id"],
+        "chargeId": response_data["node.chargeId"],
+        "createdAt": response_data["node.createdAt"],
+        "grossAmount": float(response_data["node.grossAmount.amount"]),
+        "grossAmountCurrencyCode": response_data["node.grossAmount.currencyCode"],
+        "id": response_data["node.id"],
+        "netAmount": float(response_data["node.netAmount.amount"]),
+        "netAmountCurrencyCode": response_data["node.netAmount.currencyCode"],
+        "shopDomain": response_data["node.shop.myshopifyDomain"],
+        "shopName": response_data["node.shop.name"],
+        "shopId": response_data["node.shop.id"],
+        "shopifyFee": float(response_data["node.shopifyFee.amount"]),
+        "shopifyFeeCurrencyCode": response_data["node.shopifyFee.currencyCode"],
+    }
+
+    return clean_row(cleaned_data, mapping)
+
+def clean_shopify_partners_app_relationship(
+    date_day: str,
+    response_data: dict,
+) -> dict:
+    """Clean shopify_partners_app_relationship data.
+
+        Arguments:
+            response_data {dict} -- input response_data
+
+        Returns:
+            dict -- cleaned response_data
+        """
+    # Get the mapping from the STREAMS
+    mapping: Optional[dict] = STREAMS['shopify_partners_app_relationship].get(
+        'mapping',
+    )
+
+    cleaned_data: dict = {
+        "app": response_data["node.app.name"],
+        "appId": response_data["node.app.id"],
+        "occuredAt": response_data["node.occuredAt"],
+        "shopDomain": response_data["node.shop.myshopifyDomain"],
+        "shopName": response_data["node.shop.name"],
+        "shopId": response_data["node.shop.id"],
+        "type": response_data["node.type"],
+        "description": response_data["node.description"],
+        "reason": response_data["node.reason"],
+    }
+
+    return clean_row(cleaned_data, mapping)
+
 # Collect all cleaners
 CLEANERS: MappingProxyType = MappingProxyType({
     'shopify_partners_app_subscription_sale': clean_shopify_partners_app_subscription_sale,
     'shopify_partners_app_sale_adjustment': clean_shopify_partners_app_sale_adjustment,
+    'shopify_partners_app_relationship': clean_shopify_partners_app_relationship,
 })

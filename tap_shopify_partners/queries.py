@@ -77,5 +77,105 @@ query {
   }
 }
     """,
+    'app_credit': """
+{
+  app(id: "gid://partners/App/4842809") {
+    id
+    name
+    events(
+      types: [CREDIT_APPLIED,
+      				CREDIT_FAILED,
+      				CREDIT_PENDING],
+      occurredAtMin: ":fromdate:"
+      occurredAtMax: ":todate:"
+    ) {
+      edges {
+        node {
+          app {
+            name
+            id
+          }
+          type
+          occurredAt
+          shop {
+            id
+            name
+            myshopifyDomain
+          }
+          ... on CreditApplied {
+            appCredit {
+              amount {
+              	amount
+              	currencyCode
+            	}
+            	id 
+            	name 
+            	test
+            }
+          }
+          ... on CreditFailed {
+            appCredit {
+              amount {
+              	amount
+              	currencyCode
+            	}
+              id
+              name
+              test
+            }
+          }
+          ... on CreditPending {
+            appCredit {
+              amount {
+              	amount
+              	currencyCode
+            	}
+              id
+              name
+              test
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    """,
+    'app_relationship': """
+{
+  app(id: "gid://partners/App/4842809") {
+    id
+    name
+    events(
+      types: [RELATIONSHIP_DEACTIVATED,
+      				RELATIONSHIP_INSTALLED,
+      				RELATIONSHIP_REACTIVATED,
+      				RELATIONSHIP_UNINSTALLED],
+      occurredAtMin: ":fromdate:"
+      occurredAtMax: ":todate:"
+    ) {
+      edges {
+        node {
+          app {
+            name
+            id
+          }
+          occurredAt
+          shop {
+            id
+            name
+            myshopifyDomain
+          }
+          type
+          ... on RelationshipUninstalled {
+            description
+            reason
+          }
+        }
+      }
+    }
+  }
+}
+    """,
 })
 
