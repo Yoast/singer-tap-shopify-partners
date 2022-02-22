@@ -4,7 +4,7 @@
 from types import MappingProxyType
 
 QUERIES: MappingProxyType = MappingProxyType({
-    'transactions': """
+    'app_subscription_sale': """
 query {
   transactions(types: [APP_SUBSCRIPTION_SALE], createdAtMin:":fromdate:", createdAtMax:":todate:") {
     edges {

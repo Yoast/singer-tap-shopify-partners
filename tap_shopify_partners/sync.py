@@ -58,7 +58,7 @@ def sync(
         )
 
         # Every stream has a corresponding method in the Shopify object e.g.:
-        # The stream: shopify_partners_transactions will call: shopify_partners.shopify_partners_transactions
+        # The stream: shopify_partners_app_subscription_sale will call: shopify_partners.shopify_partners_app_subscription_sale
         tap_data: Callable = getattr(shopify_partners, stream.tap_stream_id)
 
         # The tap_data method yields rows of data from the API

@@ -70,19 +70,19 @@ class Shopify(object):  # noqa: WPS230
                 items.append((new_key, value))
         return dict(items)
 
-    def shopify_partners_transactions(  # noqa: WPS210, WPS213
+    def shopify_partners_app_subscription_sale(  # noqa: WPS210, WPS213
         self,
         **kwargs: dict,
     ) -> Generator[dict, None, None]:
-        """Shopify Partners transaction history.
+        """Shopify Partners app subscription history
 
         Raises:
             ValueError: When the parameter start_date is missing
 
         Yields:
-            Generator[dict] -- Yields Shopify Partners transactions
+            Generator[dict] -- Yields Shopify Partners app subscription sales
         """
-        self.logger.info('Stream Shopify Partners Transactions')
+        self.logger.info('Stream Shopify Partners App Subscription Sales')
 
         # Validate the start_date value exists
         start_date_input: str = str(kwargs.get('start_date', ''))
@@ -95,7 +95,7 @@ class Shopify(object):  # noqa: WPS230
         end_date: datetime = datetime.now(timezone.utc).replace(microsecond=0)
 
         self.logger.info(
-            f'Retrieving transactions from {start_date} to {end_date}',
+            f'Retrieving app subscription sales data from {start_date} to {end_date}',
         )
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
@@ -112,7 +112,7 @@ class Shopify(object):  # noqa: WPS230
         self.logger.info('````````````````````About to enter date for loop (shopify_partners.py')
         for date_day in self._start_days_till_now(start_date_input):
             self.logger.info(f'~~~~~~~Inside the date for loop and currently looking at {date_day} (shopify_partners.py)')
-            query: str = QUERIES['transactions']
+            query: str = QUERIES['app_subscription_sale']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
             # query = query.replace(':fromdate:', date_day)
@@ -126,7 +126,7 @@ class Shopify(object):  # noqa: WPS230
             time.sleep(0.3)
 
             # Define cleaner:
-            cleaner: Callable = CLEANERS.get('shopify_partners_transactions')
+            cleaner: Callable = CLEANERS.get('shopify_partners_app_subscription_sale')
 
             # Raise error on 4xx and 5xxx
             response.raise_for_status()
@@ -141,7 +141,7 @@ class Shopify(object):  # noqa: WPS230
             self.logger.info(f'|||||||||||||||||| Response data: {response_data}')
 
             # yield cleaner(date_day, transactions)
-            self.logger.info('==========About to enter the transaction for loop (shopify_partners.py->shopify_partners_transactions')
+            self.logger.info('==========About to enter the transaction for loop (shopify_partners.py->shopify_partners_app_subscription_sale')
             for transaction in response_data['data']['transactions']['edges']:
                 # self.logger.info('`````````````````````````````````````````')
                 # self.logger.info('Before flattening:')
@@ -164,7 +164,7 @@ class Shopify(object):  # noqa: WPS230
             # yield from cleaner(date_day, response_data)
             # return cleaner(date_day, response_data)
 
-        self.logger.info('Finished: shopify_partners_transactions')
+        self.logger.info('Finished: shopify_partners_app_subscription_sale')
 
     def _create_headers(self) -> None:
         """Create authenticationn headers for requests."""

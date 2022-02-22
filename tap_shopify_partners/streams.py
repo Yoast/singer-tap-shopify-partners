@@ -253,7 +253,7 @@ def date_parser(input_date: str) -> str:
 
 # Streams metadata
 STREAMS: MappingProxyType = MappingProxyType({
-    'shopify_partners_transactions': {
+    'shopify_partners_app_subscription_sale': {
         'key_properties': 'id',
         'replication_method': 'INCREMENTAL',
         'replication_key': 'created_at',

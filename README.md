@@ -23,13 +23,13 @@ This requires a state.json file to let the tap know from when to retrieve data. 
 ```
 {
   "bookmarks": {
-    "shopify-partners_transactions": {
+    "shopify-partners_app_subscription_sale": {
       "start_date": "2021-01-01T00:00:00+0000"
     }
   }
 }
 ```
-Will replicate transaction data from 2021-01-01.
+Will replicate app subscription sale data from 2021-01-01.
 
 ### Step 3: Install and Run
 Create a virtual Python environment for this tap. This tap has been tested with Python 3.7, 3.8 and 3.9 and might run on future versions without problems.

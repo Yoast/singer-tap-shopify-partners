@@ -111,11 +111,11 @@ def flatten(
                 items.append((new_key, value))
         return dict(items)
 
-def clean_shopify_partners_transactions(
+def clean_shopify_partners_app_subscription_sale(
     date_day: str,
     response_data: dict,
 ) -> dict:
-    """Clean shopify_partners_transactions data.
+    """Clean shopify_partners_app_subscription_sale data.
 
         Arguments:
             response_data {dict} -- input response_data
@@ -125,7 +125,7 @@ def clean_shopify_partners_transactions(
         """
     # Get the mapping from the STREAMS
     # print('~~~~~~~~~~~~~About to go to mapping')
-    mapping: Optional[dict] = STREAMS['shopify_partners_transactions'].get(
+    mapping: Optional[dict] = STREAMS['shopify_partners_app_subscription_sale'].get(
         'mapping',
     )
 
@@ -170,5 +170,5 @@ def clean_shopify_partners_transactions(
 
 # Collect all cleaners
 CLEANERS: MappingProxyType = MappingProxyType({
-    'shopify_partners_transactions': clean_shopify_partners_transactions,
+    'shopify_partners_app_subscription_sale': clean_shopify_partners_app_subscription_sale,
 })

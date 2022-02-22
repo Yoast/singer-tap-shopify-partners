@@ -72,7 +72,7 @@ def create_bookmark(stream_name: str, bookmark_value: str) -> str:
         str -- Created bookmark
     """
     if stream_name in {
-        'shopify_partners_transactions'
+        'shopify_partners_app_subscription_sale'
     }:
         # Return tomorrow's date
         tomorrow: date = datetime.strptime(
