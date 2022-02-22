@@ -30,7 +30,6 @@ def sync(
     """
     # For every stream in the catalog
     LOGGER.info('Sync')
-    LOGGER.info(f'~~~Current state: {state}')
     LOGGER.debug('Current state:\n{state}')
 
     # Only selected streams are synced, whether a stream is selected is
@@ -49,7 +48,6 @@ def sync(
         )
 
         LOGGER.debug(f'Stream state: {stream_state}')
-        LOGGER.info(f'~~~Stream state: {stream_state}')
         # Write the schema
         singer.write_schema(
             stream_name=stream.tap_stream_id,
@@ -78,7 +76,6 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         state {dict} -- State
     """
     # Retrieve the value of the bookmark
-    LOGGER.info(f'`````````Logging row:`````````{row}')
     bookmark: Optional[str] = tools.retrieve_bookmark_with_path(
         stream.replication_key,
         row,
