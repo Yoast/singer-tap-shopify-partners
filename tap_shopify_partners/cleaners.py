@@ -124,29 +124,11 @@ def clean_shopify_partners_app_subscription_sale(
             dict -- cleaned response_data
         """
     # Get the mapping from the STREAMS
-    # print('~~~~~~~~~~~~~About to go to mapping')
     mapping: Optional[dict] = STREAMS['shopify_partners_app_subscription_sale'].get(
         'mapping',
     )
 
-    # new_records: list = []
-    # print(response_data)
-    # for transaction in response_data["data"]["transactions"]["edges"]:
-    #     transaction_flat = flatten(transaction)
-
-        # transaction_flat = flatten(response_data['data']['transactions']['edges'])
-        # Create new cleaned dict
-        # print('~~~~~~~~~~~~~~about to go to dict')
     cleaned_data: dict = {
-        # "id": response_data["node"].get("id"),
-        # "createdAt": response_data["node"].get("createdAt"),
-        # "netAmount": response_data["node"]["netAmount"].get("amount"),
-        # "grossAmount": response_data["node"]["grossAmount"].get("amount"),
-        # "shopifyFee": response_data["node"]["shopifyFee"].get("amount"),
-        # "app": response_data["node"]["app"].get("name"),
-        # "shopDomain": response_data["node"]["shop"].get("myshopifyDomain"),
-        # "shopName": response_data["node"]["shop"].get("name"),
-        # "billingInterval": response_data["node"].get("billingInterval"),
         "id": response_data["node.id"],
         "createdAt": response_data["node.createdAt"],
         "netAmount": float(response_data["node.netAmount.amount"]),
@@ -162,11 +144,8 @@ def clean_shopify_partners_app_subscription_sale(
         "billingInterval": response_data["node.billingInterval"],
         "chargeId": response_data["node.chargeId"],
     }
-        # print("~~~~~~~~~~~Cleaned data (cleaners.py)")
-        # print(cleaned_data)
-        # new_records.append(cleaned_data)
+
     return clean_row(cleaned_data, mapping)
-    # return[clean_row(new_record, mapping) for new_record in new_records]
 
 # Collect all cleaners
 CLEANERS: MappingProxyType = MappingProxyType({

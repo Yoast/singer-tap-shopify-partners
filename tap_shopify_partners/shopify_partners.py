@@ -133,36 +133,13 @@ class Shopify(object):  # noqa: WPS230
 
             # Create dictionary from response
             response_data: dict = response.json()
-            # transactions: List[dict] = response_data['data']['transactions']['edges']
-            # transactions: List[dict] = response_data.get('edges', [])
-           #  print(response_data['data']['transactions']['edges'])
-            # self.logger.info('~~~~~~~')
-            # self.logger.info(transactions)
             self.logger.info(f'|||||||||||||||||| Response data: {response_data}')
-
-            # yield cleaner(date_day, transactions)
             self.logger.info('==========About to enter the transaction for loop (shopify_partners.py->shopify_partners_app_subscription_sale')
             for transaction in response_data['data']['transactions']['edges']:
-                # self.logger.info('`````````````````````````````````````````')
-                # self.logger.info('Before flattening:')
-                # self.logger.info(transaction)
                 temp_transaction = self.flatten(transaction)
                 self.logger.info('After flattening:')
                 self.logger.info(temp_transaction)
-                # self.logger.info('Object type:')
-                # self.logger.info(type(temp_transaction))
                 yield cleaner(date_day, temp_transaction)
-
-            # for transaction in response_data:
-            #     self.logger.info(transaction)
-            #     yield cleaner(date_day, transaction)
-
-            # yield from (
-            #    cleaner(date_day, response_data)
-                #for transaction in response_data['data']['transactions']['edges']
-            #)
-            # yield from cleaner(date_day, response_data)
-            # return cleaner(date_day, response_data)
 
         self.logger.info('Finished: shopify_partners_app_subscription_sale')
 
