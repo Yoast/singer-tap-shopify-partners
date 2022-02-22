@@ -330,6 +330,7 @@ class Shopify(object):  # noqa: WPS230
             response_data: dict = response.json()
             for transaction in response_data['data']['app']['events']['edges']:
                 temp_transaction = self.flatten(transaction)
+                self.logger.info(f'$$$$$$$$Flattened: {temp_transaction}')
                 yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_relationship')
@@ -353,7 +354,6 @@ class Shopify(object):  # noqa: WPS230
             Generator -- Every day until now.
         """
         # Parse input date
-        self.logger.info(f'``````````Start date from start days till now: {start_date}')
         year: int = int(start_date.split('-')[0])
         month: int = int(start_date.split('-')[1].lstrip())
         # day: int = int(start_date.split('-')[2].lstrip())
