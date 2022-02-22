@@ -204,7 +204,7 @@ class Shopify(object):  # noqa: WPS230
         self,
         **kwargs: dict,
     ) -> Generator[dict, None, None]:
-        """Shopify Partners app credits data
+        """Shopify Partners app credit data
 
         Raises:
             ValueError: When the parameter start_date is missing
@@ -259,7 +259,7 @@ class Shopify(object):  # noqa: WPS230
 
             # Create dictionary from response
             response_data: dict = response.json()
-            for transaction in response_data['data']['transactions']['edges']:
+            for transaction in response_data['data']['app']['events']['edges']:
                 temp_transaction = self.flatten(transaction)
                 yield cleaner(date_day, temp_transaction)
 

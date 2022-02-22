@@ -204,18 +204,16 @@ def clean_shopify_partners_app_credit(
     cleaned_data: dict = {
         "app": response_data["node.app.name"],
         "appId": response_data["node.app.id"],
-        "chargeId": response_data["node.chargeId"],
-        "createdAt": response_data["node.createdAt"],
-        "grossAmount": float(response_data["node.grossAmount.amount"]),
-        "grossAmountCurrencyCode": response_data["node.grossAmount.currencyCode"],
-        "id": response_data["node.id"],
-        "netAmount": float(response_data["node.netAmount.amount"]),
-        "netAmountCurrencyCode": response_data["node.netAmount.currencyCode"],
+        "occuredAt": response_data["node.occuredAt"],
         "shopDomain": response_data["node.shop.myshopifyDomain"],
         "shopName": response_data["node.shop.name"],
         "shopId": response_data["node.shop.id"],
-        "shopifyFee": float(response_data["node.shopifyFee.amount"]),
-        "shopifyFeeCurrencyCode": response_data["node.shopifyFee.currencyCode"],
+        "type": response_data["node.type"],
+        "appCredit": float(response_data["node.appCredit.amount"]),
+        "appCreditCurrencyCode": response_data["node.appCredit.amount.currencyCode"],
+        "appCreditId": response_data["node.appCredit.id"],
+        "appCreditName": response_data["node.appCredit.name"],
+        "appCreditTest": response_data["node.appCredit.test"],
     }
 
     return clean_row(cleaned_data, mapping)
@@ -255,5 +253,6 @@ def clean_shopify_partners_app_relationship(
 CLEANERS: MappingProxyType = MappingProxyType({
     'shopify_partners_app_subscription_sale': clean_shopify_partners_app_subscription_sale,
     'shopify_partners_app_sale_adjustment': clean_shopify_partners_app_sale_adjustment,
+    'shopify_partners_app_credit': clean_shopify_partners_app_credit,
     'shopify_partners_app_relationship': clean_shopify_partners_app_relationship,
 })
