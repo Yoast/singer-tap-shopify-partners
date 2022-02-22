@@ -25,6 +25,7 @@ query {
             currencyCode
           }
           app {
+            id
             name
           }
           shop {
@@ -34,6 +35,42 @@ query {
           }
           billingInterval
           chargeId
+        }
+      }
+    }
+  }
+}
+    """,
+  'app_sale_adjustment': """
+query {
+  transactions(types: [APP_SALE_ADJUSTMENT]) {
+    edges {
+      node {
+        ... on AppSaleAdjustment {  
+          app{
+            id
+            name
+          }
+          chargeId
+          createdAt
+          grossAmount {
+            amount
+            currencyCode
+          }
+          id
+          netAmount{
+            amount
+            currencyCode
+          }
+          shop{
+            id
+            myshopifyDomain
+            name
+          }
+          shopifyFee{
+            amount
+            currencyCode
+          }
         }
       }
     }

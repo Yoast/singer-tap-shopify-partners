@@ -286,6 +286,9 @@ STREAMS: MappingProxyType = MappingProxyType({
             'app': {
                 'map': 'app', 'null': False,
             },
+            'appId': {
+                'map': 'app_id', 'null': False,
+            },
             'shopDomain': {
                 'map': 'shop_domain', 'null': False,
             },
@@ -301,6 +304,56 @@ STREAMS: MappingProxyType = MappingProxyType({
             'chargeId': {
                 'map': 'charge_id', 'null': False,
             },  
+        }
+    },
+    'shopify_partners_app_sale_adjustment': {
+        'key_properties': 'id',
+        'replication_method': 'INCREMENTAL',
+        'replication_key': 'created_at',
+        'bookmark': 'start_date',
+        'mapping': {
+            'app': {
+                'map': 'app', 'null': False,
+            },
+            'appId': {
+                'map': 'app_id', 'null': False,
+            },
+            'chargeId' {
+                'map': 'charge_id', 'null': True,
+            },
+            'createdAt': {
+                'map': 'created_at', 'null': False,
+            },
+            'grossAmount': {
+                'map': 'gross_amount', 'null': False,
+            },
+            'grossAmountCurrencyCode': {
+                'map': 'gross_amount_currency_code', 'null': False,
+            },
+            'id': {
+                'map': 'id', 'null': False,
+            },
+            'netAmount': {
+                'map': 'net_amount', 'null': False,
+            },
+            'netAmountCurrencyCode': {
+                'map': 'net_amount_currency_code', 'null': False,
+            },
+            'shopDomain': {
+                'map': 'shop_domain', 'null': False,
+            },
+            'shopName': {
+                'map': 'shop_name', 'null': False,
+            },
+            'shopId': {
+                'map': 'shop_id', 'null': False,
+            },
+            'shopifyFee': {
+                'map': 'shopify_fee', 'null': False,
+            },
+            'shopifyFeeCurrencyCode': {
+                'map': 'shopify_fee_currency_code', 'null': False,
+            },
         }
     }
 })

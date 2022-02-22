@@ -109,15 +109,11 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        self.logger.info('````````````````````About to enter date for loop (shopify_partners.py')
         for date_day in self._start_days_till_now(start_date_input):
-            self.logger.info(f'~~~~~~~Inside the date for loop and currently looking at {date_day} (shopify_partners.py)')
             query: str = QUERIES['app_subscription_sale']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
-            # query = query.replace(':fromdate:', date_day)
             query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
-            # query = query.replace(':todate:', date_day)
             response: httpx._models.Response = self.client.post(  # noqa
                 url,
                 headers=self.headers,
@@ -133,8 +129,6 @@ class Shopify(object):  # noqa: WPS230
 
             # Create dictionary from response
             response_data: dict = response.json()
-            self.logger.info(f'|||||||||||||||||| Response data: {response_data}')
-            self.logger.info('==========About to enter the transaction for loop (shopify_partners.py->shopify_partners_app_subscription_sale')
             for transaction in response_data['data']['transactions']['edges']:
                 temp_transaction = self.flatten(transaction)
                 self.logger.info('After flattening:')
@@ -142,6 +136,73 @@ class Shopify(object):  # noqa: WPS230
                 yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_subscription_sale')
+    
+    def shopify_partners_app_sale_adjustment(  # noqa: WPS210, WPS213
+        self,
+        **kwargs: dict,
+    ) -> Generator[dict, None, None]:
+        """Shopify Partners app sale adjustments (refunds)
+
+        Raises:
+            ValueError: When the parameter start_date is missing
+
+        Yields:
+            Generator[dict] -- Yields Shopify Partners app sale adjustment data
+        """
+        self.logger.info('Stream Shopify Partners App Sales Adjustment')
+
+        # Validate the start_date value exists
+        start_date_input: str = str(kwargs.get('start_date', ''))
+
+        if not start_date_input:
+            raise ValueError('The parameter start_date is required.')
+
+        # Set start date and end date
+        start_date: datetime = isoparse(start_date_input)
+        end_date: datetime = datetime.now(timezone.utc).replace(microsecond=0)
+
+        self.logger.info(
+            f'Retrieving app sales adjustment data from {start_date} to {end_date}',
+        )
+        # Extra kwargs will be converted to parameters in the API requests
+        # start_date is parsed into batches, thus we remove it from the kwargs
+        kwargs.pop('start_date', None)
+
+        # Build URL
+        org_id: str=API_ORG_ID.replace(':organization_id:', self.organization_id)
+        url: str = (
+            f'{API_SCHEME}{API_BASE_URL}{org_id}'
+            f'{API_VERSION}{API_PATH_CALL_TYPE}'
+        )
+        self._create_headers()
+
+        for date_day in self._start_days_till_now(start_date_input):
+            query: str = QUERIES['app_sale_adjustment']
+            # Replace dates in placeholders
+            query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+            query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
+            response: httpx._models.Response = self.client.post(  # noqa
+                url,
+                headers=self.headers,
+                data=query,
+                )
+            time.sleep(0.3)
+
+            # Define cleaner:
+            cleaner: Callable = CLEANERS.get('shopify_partners_app_sale_adjustment')
+
+            # Raise error on 4xx and 5xxx
+            response.raise_for_status()
+
+            # Create dictionary from response
+            response_data: dict = response.json()
+            for transaction in response_data['data']['transactions']['edges']:
+                temp_transaction = self.flatten(transaction)
+                self.logger.info('After flattening:')
+                self.logger.info(temp_transaction)
+                yield cleaner(date_day, temp_transaction)
+
+        self.logger.info('Finished: shopify_partners_app_sale_adjustment')
 
     def _create_headers(self) -> None:
         """Create authenticationn headers for requests."""
