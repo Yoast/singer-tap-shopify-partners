@@ -382,7 +382,7 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
             'type': {
                 'map': 'type', 'null': False,
-            }
+            },
             'appCredit': {
                 'map': 'app_credit', 'null': True,
             },
@@ -426,13 +426,13 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
             'type': {
                 'map': 'type', 'null': False,
-            }
+            },
             'description': {
                 'map': 'description', 'null': True,
-            }
+            },
             'reason': {
                 'map': 'reason', 'null': True,
-            },
+            }
         }
     }
 })
