@@ -355,5 +355,40 @@ STREAMS: MappingProxyType = MappingProxyType({
                 'map': 'shopify_fee_currency_code', 'null': False,
             },
         }
+    },
+    'shopify_partners_app_relationship': {
+        'key_properties': 'id',
+        'replication_method': 'INCREMENTAL',
+        'replication_key': 'occured_at',
+        'bookmark': 'start_date',
+        'mapping': {
+            'app': {
+                'map': 'app', 'null': False,
+            },
+            'appId': {
+                'map': 'app_id', 'null': False,
+            },
+            'occuredAt': {
+                'map': 'occured_at', 'null': False,
+            },
+            'shopDomain': {
+                'map': 'shop_domain', 'null': False,
+            },
+            'shopName': {
+                'map': 'shop_name', 'null': False,
+            },
+            'shopId': {
+                'map': 'shop_id', 'null': False,
+            },
+            'type': {
+                'map': 'type', 'null': False,
+            }
+            'description': {
+                'map': 'description', 'null': True,
+            }
+            'reason': {
+                'map': 'reason', 'null': True,
+            },
+        }
     }
 })
