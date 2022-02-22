@@ -216,9 +216,6 @@ class Shopify(object):  # noqa: WPS230
 
         # Validate the start_date value exists
         start_date_input: str = str(kwargs.get('start_date', ''))
-        self.logger.info(f'``````````Start date: {start_date_input}')
-        test_date = isoparse(start_date_input)
-        self.logger.info(f'``````````After isoparse: {test_date}')
         if not start_date_input:
             raise ValueError('The parameter start_date is required.')
 
@@ -230,6 +227,7 @@ class Shopify(object):  # noqa: WPS230
             f'Retrieving app credit data from {start_date} to {end_date}',
         )
 
+        # The start date until now function wants a string
         start_date_string = str(start_date)
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
@@ -296,6 +294,8 @@ class Shopify(object):  # noqa: WPS230
         self.logger.info(
             f'Retrieving app relationship data from {start_date} to {end_date}',
         )
+         # The start date until now function wants a string
+        start_date_string = str(start_date)
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -308,7 +308,7 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        for date_day in self._start_days_till_now(start_date_input):
+        for date_day in self._start_days_till_now(start_date_string):
             query: str = QUERIES['app_relationship']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
@@ -357,6 +357,7 @@ class Shopify(object):  # noqa: WPS230
         year: int = int(start_date.split('-')[0])
         month: int = int(start_date.split('-')[1].lstrip())
         # day: int = int(start_date.split('-')[2].lstrip())
+        # strip the ISO-8601 characters off of the day, leaving only the digit
         day: int = int(start_date.split('-')[2].rstrip("0:+ ").lstrip("0"))
 
         # Setup start period
