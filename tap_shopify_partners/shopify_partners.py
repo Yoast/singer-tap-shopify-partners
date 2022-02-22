@@ -241,7 +241,7 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        for date_day in self._start_days_till_now(start_date_input):
+        for date_day in self._start_days_till_now(start_date):
             query: str = QUERIES['app_credit']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
@@ -351,6 +351,7 @@ class Shopify(object):  # noqa: WPS230
             Generator -- Every day until now.
         """
         # Parse input date
+        self.logger.info(f'``````````Start date from start days till now: {start_date}')
         year: int = int(start_date.split('-')[0])
         month: int = int(start_date.split('-')[1].lstrip())
         # day: int = int(start_date.split('-')[2].lstrip())
