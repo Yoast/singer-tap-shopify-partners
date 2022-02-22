@@ -43,7 +43,7 @@ query {
     """,
   'app_sale_adjustment': """
 query {
-  transactions(types: [APP_SALE_ADJUSTMENT]) {
+  transactions(types: [APP_SALE_ADJUSTMENT], createdAtMin:":fromdate:", createdAtMax:":todate:") {
     edges {
       node {
         ... on AppSaleAdjustment {  
