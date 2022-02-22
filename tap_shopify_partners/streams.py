@@ -300,18 +300,6 @@ STREAMS: MappingProxyType = MappingProxyType({
             }, 
             'chargeId': {
                 'map': 'charge_id', 'null': False,
-            },
-            'processingFee': {
-                'map': 'processing_fee', 'null': False,
-            },
-            'processingFeeCurrencyCode': {
-                'map': 'processing_fee_currency_code', 'null': False,
-            },
-            'regulatoryOperatingFee': {
-                'map': 'regulatory_operating_fee', 'null': False,
-            },
-            'regulatoryOperatingFeeCurrencyCode': {
-                'map': 'regulatory_operating_fee_currency_code', 'null': False,
             },  
         }
     }

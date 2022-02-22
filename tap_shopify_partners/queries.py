@@ -34,14 +34,6 @@ query {
           }
           billingInterval
           chargeId
-          processingFee{
-            amount
-            currencyCode
-          }
-          regulatoryOperatingFee{
-            amount
-            currencyCode
-          } 
         }
       }
     }

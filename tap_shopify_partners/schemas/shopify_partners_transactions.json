@@ -48,18 +48,6 @@
         },
         "charge_id": {
             "type": "string"
-        },
-        "processing_fee": {
-            "type": "number"
-        },
-        "processing_fee_currency_code": {
-            "type": "string"
-        },
-        "regulatory_operating_fee": {
-            "type": "number"
-        },
-        "regulatory_operating_fee_currency_code": {
-            "type": "string"
         }
     }
 }
