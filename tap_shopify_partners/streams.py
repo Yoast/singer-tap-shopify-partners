@@ -397,7 +397,7 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
             'appCreditTest': {
                 'map': 'app_credit_test', 'null': True,
-            }
+            },
         }
     },
     'shopify_partners_app_relationship': {
@@ -432,7 +432,7 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
             'reason': {
                 'map': 'reason', 'null': True,
-            }
+            },
         }
     }
 })
