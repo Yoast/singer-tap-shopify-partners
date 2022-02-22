@@ -229,6 +229,8 @@ class Shopify(object):  # noqa: WPS230
         self.logger.info(
             f'Retrieving app credit data from {start_date} to {end_date}',
         )
+
+        start_date_string = str(start_date)
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -241,7 +243,7 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        for date_day in self._start_days_till_now(start_date):
+        for date_day in self._start_days_till_now(start_date_string):
             query: str = QUERIES['app_credit']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
