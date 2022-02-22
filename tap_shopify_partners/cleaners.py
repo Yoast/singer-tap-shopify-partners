@@ -197,7 +197,7 @@ def clean_shopify_partners_app_credit(
             dict -- cleaned response_data
         """
     # Get the mapping from the STREAMS
-    mapping: Optional[dict] = STREAMS['shopify_partners_app_credit].get(
+    mapping: Optional[dict] = STREAMS['shopify_partners_app_credit'].get(
         'mapping',
     )
 
@@ -231,7 +231,7 @@ def clean_shopify_partners_app_relationship(
             dict -- cleaned response_data
         """
     # Get the mapping from the STREAMS
-    mapping: Optional[dict] = STREAMS['shopify_partners_app_relationship].get(
+    mapping: Optional[dict] = STREAMS['shopify_partners_app_relationship'].get(
         'mapping',
     )
 
