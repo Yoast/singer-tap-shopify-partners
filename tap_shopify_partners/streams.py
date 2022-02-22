@@ -318,7 +318,7 @@ STREAMS: MappingProxyType = MappingProxyType({
             'appId': {
                 'map': 'app_id', 'null': False,
             },
-            'chargeId' {
+            'chargeId': {
                 'map': 'charge_id', 'null': True,
             },
             'createdAt': {
