@@ -92,6 +92,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
     )
 
     if new_bookmark:
+        LOGGER.info(f'=========Bookmark about to be written to state: {new_bookmark}')
         # Save the bookmark to the state
         singer.write_bookmark(
             state,
