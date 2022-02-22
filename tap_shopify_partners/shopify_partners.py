@@ -110,6 +110,7 @@ class Shopify(object):  # noqa: WPS230
         self._create_headers()
 
         for date_day in self._start_days_till_now(start_date_input):
+            self.logger.info(f'Retrieving data from {date_day}')
             query: str = QUERIES['app_subscription_sale']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
@@ -131,8 +132,6 @@ class Shopify(object):  # noqa: WPS230
             response_data: dict = response.json()
             for transaction in response_data['data']['transactions']['edges']:
                 temp_transaction = self.flatten(transaction)
-                self.logger.info('After flattening:')
-                self.logger.info(temp_transaction)
                 yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_subscription_sale')
@@ -177,6 +176,7 @@ class Shopify(object):  # noqa: WPS230
         self._create_headers()
 
         for date_day in self._start_days_till_now(start_date_input):
+            self.logger.info(f'Retrieving data from {date_day}')
             query: str = QUERIES['app_sale_adjustment']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
@@ -198,8 +198,6 @@ class Shopify(object):  # noqa: WPS230
             response_data: dict = response.json()
             for transaction in response_data['data']['transactions']['edges']:
                 temp_transaction = self.flatten(transaction)
-                self.logger.info('After flattening:')
-                self.logger.info(temp_transaction)
                 yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_sale_adjustment')
