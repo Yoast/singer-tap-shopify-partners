@@ -353,7 +353,8 @@ class Shopify(object):  # noqa: WPS230
         # Parse input date
         year: int = int(start_date.split('-')[0])
         month: int = int(start_date.split('-')[1].lstrip())
-        day: int = int(start_date.split('-')[2].lstrip())
+        # day: int = int(start_date.split('-')[2].lstrip())
+        day: int = int(start_date.split('-')[2].rstrip("0:+ "))
 
         # Setup start period
         period: date = date(year, month, day)
