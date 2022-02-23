@@ -303,4 +303,5 @@ CLEANERS: MappingProxyType = MappingProxyType({
     'shopify_partners_app_sale_adjustment': clean_shopify_partners_app_sale_adjustment,
     'shopify_partners_app_credit': clean_shopify_partners_app_credit,
     'shopify_partners_app_relationship': clean_shopify_partners_app_relationship,
+    'shopify_partners_app_subscription_charge': clean_shopify_partners_app_subscription_charge
 })
