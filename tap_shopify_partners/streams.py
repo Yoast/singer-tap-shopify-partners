@@ -359,7 +359,7 @@ STREAMS: MappingProxyType = MappingProxyType({
     'shopify_partners_app_credit': {
         'key_properties': 'shop_id',
         'replication_method': 'INCREMENTAL',
-        'replication_key': 'occured_at',
+        'replication_key': 'occurred_at',
         'bookmark': 'start_date',
         'mapping': {
             'app': {
@@ -368,8 +368,8 @@ STREAMS: MappingProxyType = MappingProxyType({
             'appId': {
                 'map': 'app_id', 'null': False,
             },
-            'occuredAt': {
-                'map': 'occured_at', 'null': False,
+            'occurredAt': {
+                'map': 'occurred_at', 'null': False,
             },
             'shopDomain': {
                 'map': 'shop_domain', 'null': False,
@@ -403,7 +403,7 @@ STREAMS: MappingProxyType = MappingProxyType({
     'shopify_partners_app_relationship': {
         'key_properties': 'shop_id',
         'replication_method': 'INCREMENTAL',
-        'replication_key': 'occured_at',
+        'replication_key': 'occurred_at',
         'bookmark': 'start_date',
         'mapping': {
             'app': {
@@ -412,8 +412,8 @@ STREAMS: MappingProxyType = MappingProxyType({
             'appId': {
                 'map': 'app_id', 'null': False,
             },
-            'occuredAt': {
-                'map': 'occured_at', 'null': False,
+            'occurredAt': {
+                'map': 'occurred_at', 'null': False,
             },
             'shopDomain': {
                 'map': 'shop_domain', 'null': False,

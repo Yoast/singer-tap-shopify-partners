@@ -12,7 +12,7 @@
         "app_id": {
             "type": "string"
         },
-        "occured_at": {
+        "occurred_at": {
             "type": "string",
             "format": "date-time"
         },

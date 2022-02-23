@@ -204,7 +204,7 @@ def clean_shopify_partners_app_credit(
     cleaned_data: dict = {
         "app": response_data["node.app.name"],
         "appId": response_data["node.app.id"],
-        "occuredAt": response_data["node.occuredAt"],
+        "occurredAt": response_data["node.occurredAt"],
         "shopDomain": response_data["node.shop.myshopifyDomain"],
         "shopName": response_data["node.shop.name"],
         "shopId": response_data["node.shop.id"],
@@ -238,7 +238,7 @@ def clean_shopify_partners_app_relationship(
     cleaned_data: dict = {
         "app": response_data["node.app.name"],
         "appId": response_data["node.app.id"],
-        "occuredAt": response_data["node.occuredAt"],
+        "occurredAt": response_data["node.occurredAt"],
         "shopDomain": response_data["node.shop.myshopifyDomain"],
         "shopName": response_data["node.shop.name"],
         "shopId": response_data["node.shop.id"],
