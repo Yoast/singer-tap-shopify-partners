@@ -17,7 +17,7 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        tap-shopify-partners=tap-shopify-partners:main
+        tap-shopify-partners=tap_shopify_partners:main
     """,
     packages=['tap-shopify-partners'],
     package_data={
