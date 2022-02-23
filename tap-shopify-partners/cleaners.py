@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from decimal import Decimal
 from types import MappingProxyType
-from tap_shopify_partners.streams import STREAMS
+from tap-shopify-partners.streams import STREAMS
 from dateutil.parser import parse as parse_d
 from typing import Any, Optional
 import collections

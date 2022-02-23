@@ -7,9 +7,9 @@ import pkg_resources
 from singer import get_logger, utils
 from singer.catalog import Catalog
 
-from tap_shopify_partners.shopify_partners import Shopify
-from tap_shopify_partners.discover import discover
-from tap_shopify_partners.sync import sync
+from tap-shopify-partners.shopify_partners import Shopify
+from tap-shopify-partners.discover import discover
+from tap-shopify-partners.sync import sync
 
 VERSION: str = pkg_resources.get_distribution('tap-shopify-partners').version
 LOGGER: logging.RootLogger = get_logger()
