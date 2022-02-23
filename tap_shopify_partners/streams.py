@@ -464,7 +464,7 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
             'test': {
                 'map': 'test', 'null': False,
-            }
+            },
             'occurredAt': {
                 'map': 'occurred_at', 'null': False,
             },
