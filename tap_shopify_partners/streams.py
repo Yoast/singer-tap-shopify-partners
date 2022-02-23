@@ -454,7 +454,7 @@ STREAMS: MappingProxyType = MappingProxyType({
                 'map': 'subscription_charge_currency_code', 'null': False,
             },
             'billingOn': {
-                'map': 'billing_on', 'null': False,
+                'map': 'billing_on', 'null': True,
             },
             'id': {
                 'map': 'id', 'null': False,

@@ -19,7 +19,10 @@
             "type": "string"
         },
         "billing_on": {
-            "type": "string",
+            "type": [
+				"null",
+				"string"
+			],
             "format": "date"
         },
         "id": {
