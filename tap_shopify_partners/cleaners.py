@@ -235,17 +235,30 @@ def clean_shopify_partners_app_relationship(
         'mapping',
     )
 
-    cleaned_data: dict = {
-        "app": response_data["node.app.name"],
-        "appId": response_data["node.app.id"],
-        "occurredAt": response_data["node.occurredAt"],
-        "shopDomain": response_data["node.shop.myshopifyDomain"],
-        "shopName": response_data["node.shop.name"],
-        "shopId": response_data["node.shop.id"],
-        "type": response_data["node.type"],
-        "description": response_data["node.description"],
-        "reason": response_data["node.reason"],
-    }
+    if response_data["node.type"] == "RELATIONSHIP_UNINSTALLED":
+        cleaned_data: dict = {
+            "app": response_data["node.app.name"],
+            "appId": response_data["node.app.id"],
+            "occurredAt": response_data["node.occurredAt"],
+            "shopDomain": response_data["node.shop.myshopifyDomain"],
+            "shopName": response_data["node.shop.name"],
+            "shopId": response_data["node.shop.id"],
+            "type": response_data["node.type"],
+            "description": response_data["node.description"],
+            "reason": response_data["node.reason"],
+        }
+    else:
+        cleaned_data: dict = {
+            "app": response_data["node.app.name"],
+            "appId": response_data["node.app.id"],
+            "occurredAt": response_data["node.occurredAt"],
+            "shopDomain": response_data["node.shop.myshopifyDomain"],
+            "shopName": response_data["node.shop.name"],
+            "shopId": response_data["node.shop.id"],
+            "type": response_data["node.type"],
+            # "description": response_data["node.description"],
+            # "reason": response_data["node.reason"],
+        }
 
     return clean_row(cleaned_data, mapping)
 
