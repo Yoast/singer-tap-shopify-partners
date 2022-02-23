@@ -3,8 +3,8 @@
 from singer import metadata
 from singer.catalog import Catalog, CatalogEntry
 
-from tap_shopify_partners.schema import load_schemas
-from tap_shopify_partners.streams import STREAMS
+from tap-shopify-partners.schema import load_schemas
+from tap-shopify-partners.streams import STREAMS
 
 
 def discover() -> Catalog:  # noqa: WPS210

@@ -1,2 +1,2 @@
 include LICENSE
-include tap_shopify_partners/schemas/*.json
+include tap-shopify-partners/schemas/*.json
