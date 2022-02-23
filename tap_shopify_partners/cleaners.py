@@ -256,8 +256,8 @@ def clean_shopify_partners_app_relationship(
             "shopName": response_data["node.shop.name"],
             "shopId": response_data["node.shop.id"],
             "type": response_data["node.type"],
-            # "description": response_data["node.description"],
-            # "reason": response_data["node.reason"],
+            "description": null,
+            "reason": null,
         }
 
     return clean_row(cleaned_data, mapping)
