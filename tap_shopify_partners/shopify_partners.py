@@ -97,6 +97,8 @@ class Shopify(object):  # noqa: WPS230
         self.logger.info(
             f'Retrieving app subscription sales data from {start_date} to {end_date}',
         )
+         # The start date until now function wants a string
+        start_date_string = str(start_date)
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -109,7 +111,7 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        for date_day in self._start_days_till_now(start_date_input):
+        for date_day in self._start_days_till_now(start_date_string):
             query: str = QUERIES['app_subscription_sale']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
@@ -162,6 +164,8 @@ class Shopify(object):  # noqa: WPS230
         self.logger.info(
             f'Retrieving app sales adjustment data from {start_date} to {end_date}',
         )
+         # The start date until now function wants a string
+        start_date_string = str(start_date)
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -174,7 +178,7 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        for date_day in self._start_days_till_now(start_date_input):
+        for date_day in self._start_days_till_now(start_date_string):
             query: str = QUERIES['app_sale_adjustment']
             # Replace dates in placeholders
             query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
@@ -330,7 +334,6 @@ class Shopify(object):  # noqa: WPS230
             response_data: dict = response.json()
             for transaction in response_data['data']['app']['events']['edges']:
                 temp_transaction = self.flatten(transaction)
-                self.logger.info(f'$$$$$$$$Flattened: {temp_transaction}')
                 yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_relationship')
