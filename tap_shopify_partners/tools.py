@@ -76,6 +76,7 @@ def create_bookmark(stream_name: str, bookmark_value: str) -> str:
         'shopify_partners_app_sale_adjustment',
         'shopify_partners_app_sale_credit',
         'shopify_partners_app_relationship',
+        'shopify_partners_app_subscription_charge',
     }:
         # Return tomorrow's date
         tomorrow: date = datetime.strptime(

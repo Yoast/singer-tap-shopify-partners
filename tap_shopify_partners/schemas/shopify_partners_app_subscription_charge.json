@@ -1,0 +1,51 @@
+{
+    "selected": true,
+    "type": [
+        "null",
+        "object"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "app": {
+            "type": "string"
+        },
+        "app_id": {
+            "type": "string"
+        },
+        "subscription_charge": {
+            "type": "number"
+        },
+        "subscription_charge_currency_code": {
+            "type": "string"
+        },
+        "billing_on": {
+            "type": "string",
+            "format": "date"
+        },
+        "id": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
+        "test": {
+            "type": "string"
+        },
+        "occurred_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "shop_domain": {
+            "type": "string"
+        },
+        "shop_name": {
+            "type": "string"
+        },
+        "shop_id": {
+            "type": "string"
+        },
+        "type": {
+            "type": "string"
+        }
+    }
+}

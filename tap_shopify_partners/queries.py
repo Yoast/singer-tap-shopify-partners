@@ -177,5 +177,117 @@ query {
   }
 }
     """,
+    'app_subscription_charge': """
+{
+  app(id: "gid://partners/App/4842809") {
+    events(
+      types: [SUBSCRIPTION_CHARGE_ACCEPTED, SUBSCRIPTION_CHARGE_ACTIVATED, SUBSCRIPTION_CHARGE_CANCELED, SUBSCRIPTION_CHARGE_DECLINED, SUBSCRIPTION_CHARGE_EXPIRED, SUBSCRIPTION_CHARGE_FROZEN, SUBSCRIPTION_CHARGE_UNFROZEN]
+      occurredAtMin: ":fromdate:"
+      occurredAtMax: ":todate:"
+    ) {
+      edges {
+        node {
+          app {
+            name
+            id
+          }
+          ... on SubscriptionChargeAccepted {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          ... on SubscriptionChargeActivated {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          ... on SubscriptionChargeCanceled {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          ... on SubscriptionChargeDeclined {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          ... on SubscriptionChargeExpired {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          ... on SubscriptionChargeFrozen {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          ... on SubscriptionChargeUnfrozen {
+            charge {
+            	amount {
+              	amount
+              	currencyCode
+            	}
+            	billingOn
+            	id
+            	name
+            	test
+          	}
+          }
+          occurredAt
+          shop {
+            id
+            name
+            myshopifyDomain
+          }
+          type
+        }
+      }
+    }
+  }
+}
+
+    """,
 })
 

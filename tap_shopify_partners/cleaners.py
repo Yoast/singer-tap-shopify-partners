@@ -262,6 +262,41 @@ def clean_shopify_partners_app_relationship(
 
     return clean_row(cleaned_data, mapping)
 
+def clean_shopify_partners_app_subscription_charge(
+    date_day: str,
+    response_data: dict,
+) -> dict:
+    """Clean shopify_partners_app_subscription_charge data.
+
+        Arguments:
+            response_data {dict} -- input response_data
+
+        Returns:
+            dict -- cleaned response_data
+        """
+    # Get the mapping from the STREAMS
+    mapping: Optional[dict] = STREAMS['shopify_partners_app_subscription_charge'].get(
+        'mapping',
+    )
+
+    cleaned_data: dict = {
+        "app": response_data["node.app.name"],
+        "appId": response_data["node.app.id"],
+        "subscriptionCharge": float(response_data["node.charge.amount.amount"]),
+        "subscriptionChargeCurrencyCode": response_data["node.charge.amount.currencyCode"],
+        "billingOn": response_data["node.charge.billingOn"],
+        "id": response_data["node.charge.id"],
+        "name": response_data["node.charge.name"],
+        "test": response_data["node.charge.test"],
+        "occurredAt": response_data["node.occurredAt"],
+        "shopDomain": response_data["node.shop.myshopifyDomain"],
+        "shopName": response_data["node.shop.name"],
+        "shopId": response_data["node.shop.id"],
+        "type": response_data["node.type"],
+    }
+
+    return clean_row(cleaned_data, mapping)
+
 # Collect all cleaners
 CLEANERS: MappingProxyType = MappingProxyType({
     'shopify_partners_app_subscription_sale': clean_shopify_partners_app_subscription_sale,
