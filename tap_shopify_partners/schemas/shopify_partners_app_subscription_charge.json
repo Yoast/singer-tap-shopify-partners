@@ -32,7 +32,7 @@
             "type": "string"
         },
         "test": {
-            "type": "string"
+            "type": "boolean"
         },
         "occurred_at": {
             "type": "string",
