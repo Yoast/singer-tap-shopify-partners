@@ -121,7 +121,7 @@ class Shopify(object):  # noqa: WPS230
                 headers=self.headers,
                 data=query,
                 )
-            time.sleep(1)
+            time.sleep(2)
 
             # Define cleaner:
             cleaner: Callable = CLEANERS.get('shopify_partners_app_subscription_sale')
@@ -188,7 +188,7 @@ class Shopify(object):  # noqa: WPS230
                 headers=self.headers,
                 data=query,
                 )
-            time.sleep(1)
+            time.sleep(2)
 
             # Define cleaner:
             cleaner: Callable = CLEANERS.get('shopify_partners_app_sale_adjustment')
@@ -255,7 +255,7 @@ class Shopify(object):  # noqa: WPS230
                 headers=self.headers,
                 data=query,
                 )
-            time.sleep(1)
+            time.sleep(2)
 
             # Define cleaner:
             cleaner: Callable = CLEANERS.get('shopify_partners_app_credit')
@@ -322,7 +322,7 @@ class Shopify(object):  # noqa: WPS230
                 headers=self.headers,
                 data=query,
                 )
-            time.sleep(1)
+            time.sleep(2)
 
             # Define cleaner:
             cleaner: Callable = CLEANERS.get('shopify_partners_app_relationship')
