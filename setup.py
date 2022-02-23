@@ -9,7 +9,7 @@ setup(
     author='Yoast',
     url='https://github.com/Yoast/singer-tap-shopify-partners',
     classifiers=['Programming Language :: Python :: 3 :: Only'],
-    py_modules=['tap-shopify-partners'],
+    py_modules=['tap_shopify_partners'],
     install_requires=[
         'httpx[http2]~=0.16.1',
         'python-dateutil~=2.8.1',
