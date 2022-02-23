@@ -9,7 +9,7 @@ setup(
     author='Yoast',
     url='https://github.com/Yoast/singer-tap-shopify-partners',
     classifiers=['Programming Language :: Python :: 3 :: Only'],
-    py_modules=['tap-shopify-partners'],
+    py_modules=['tap_shopify_partners'],
     install_requires=[
         'httpx[http2]~=0.16.1',
         'python-dateutil~=2.8.1',
@@ -17,11 +17,11 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        tap-shopify-partners=tap-shopify-partners:main
+        tap-shopify-partners=tap_shopify_partners:main
     """,
-    packages=['tap-shopify-partners'],
+    packages=['tap_shopify_partners'],
     package_data={
-        'schemas': ['tap-shopify-partners/schemas/*.json'],
+        'schemas': ['tap_shopify_partners/schemas/*.json'],
     },
     include_package_data=True,
 )
