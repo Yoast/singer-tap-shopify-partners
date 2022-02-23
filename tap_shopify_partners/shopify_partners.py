@@ -13,8 +13,8 @@ import collections
 from dateutil.parser import isoparse
 from dateutil.rrule import DAILY, rrule
 
-from tap-shopify-partners.cleaners import CLEANERS
-from tap-shopify-partners.queries import QUERIES
+from tap_shopify_partners.cleaners import CLEANERS
+from tap_shopify_partners.queries import QUERIES
 
 API_SCHEME: str = 'https://'
 API_BASE_URL: str = 'partners.shopify.com/'

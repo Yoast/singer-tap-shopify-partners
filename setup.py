@@ -19,9 +19,9 @@ setup(
         [console_scripts]
         tap-shopify-partners=tap_shopify_partners:main
     """,
-    packages=['tap-shopify-partners'],
+    packages=['tap_shopify_partners'],
     package_data={
-        'schemas': ['tap-shopify-partners/schemas/*.json'],
+        'schemas': ['tap_shopify_partners/schemas/*.json'],
     },
     include_package_data=True,
 )
