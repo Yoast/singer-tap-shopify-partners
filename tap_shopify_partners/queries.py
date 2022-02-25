@@ -184,7 +184,12 @@ query {
       types: [SUBSCRIPTION_CHARGE_ACCEPTED, SUBSCRIPTION_CHARGE_ACTIVATED, SUBSCRIPTION_CHARGE_CANCELED, SUBSCRIPTION_CHARGE_DECLINED, SUBSCRIPTION_CHARGE_EXPIRED, SUBSCRIPTION_CHARGE_FROZEN, SUBSCRIPTION_CHARGE_UNFROZEN]
       occurredAtMin: ":fromdate:"
       occurredAtMax: ":todate:"
+      first: 20
+      after: ":cursor:"
     ) {
+      pageInfo{
+        hasNextPage
+      }
       edges {
         node {
           app {
