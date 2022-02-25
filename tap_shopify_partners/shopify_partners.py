@@ -399,8 +399,6 @@ class Shopify(object):  # noqa: WPS230
                     data=query,
                     )
                 time.sleep(2)
-                # TODO: if there are problems, might need to get an if statement to handle the weird lower case 'false' or 'true' that will come in.
-                hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
 
                 # Define cleaner:
                 cleaner: Callable = CLEANERS.get('shopify_partners_app_subscription_charge')
@@ -410,6 +408,8 @@ class Shopify(object):  # noqa: WPS230
 
                 # Create dictionary from response
                 response_data: dict = response.json()
+                # TODO: if there are problems, might need to get an if statement to handle the weird lower case 'false' or 'true' that will come in.
+                hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
                 temp_count = 0 #TODO: remove me later
                 for transaction in response_data['data']['app']['events']['edges']:
                     latest_cursor = transaction.get('cursor')
