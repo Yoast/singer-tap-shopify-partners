@@ -190,28 +190,39 @@ class Shopify(object):  # noqa: WPS230
         self._create_headers()
 
         for date_day in self._start_days_till_now(start_date_string):
-            query: str = QUERIES['app_sale_adjustment']
-            # Replace dates in placeholders
-            query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
-            query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
-            response: httpx._models.Response = self.client.post(  # noqa
-                url,
-                headers=self.headers,
-                data=query,
-                )
-            time.sleep(2)
+            
+            hasNextPage = True
+            latest_cursor = ""
+            
+            # Data is paginated so need to go page by page until false
+            while hasNextPage:
+            
+                query: str = QUERIES['app_sale_adjustment']
+                # Replace dates in placeholders
+                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
+                query = query.replace(':cursor:', latest_cursor)
 
-            # Define cleaner:
-            cleaner: Callable = CLEANERS.get('shopify_partners_app_sale_adjustment')
+                response: httpx._models.Response = self.client.post(  # noqa
+                    url,
+                    headers=self.headers,
+                    data=query,
+                    )
+                time.sleep(2)
 
-            # Raise error on 4xx and 5xxx
-            response.raise_for_status()
+                # Define cleaner:
+                cleaner: Callable = CLEANERS.get('shopify_partners_app_sale_adjustment')
 
-            # Create dictionary from response
-            response_data: dict = response.json()
-            for transaction in response_data['data']['transactions']['edges']:
-                temp_transaction = self.flatten(transaction)
-                yield cleaner(date_day, temp_transaction)
+                # Raise error on 4xx and 5xxx
+                response.raise_for_status()
+
+                # Create dictionary from response
+                response_data: dict = response.json()
+                hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
+                for transaction in response_data['data']['transactions']['edges']:
+                    latest_cursor = transaction.get('cursor')
+                    temp_transaction = self.flatten(transaction)
+                    yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_sale_adjustment')
     
@@ -257,28 +268,39 @@ class Shopify(object):  # noqa: WPS230
         self._create_headers()
 
         for date_day in self._start_days_till_now(start_date_string):
-            query: str = QUERIES['app_credit']
-            # Replace dates in placeholders
-            query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
-            query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
-            response: httpx._models.Response = self.client.post(  # noqa
-                url,
-                headers=self.headers,
-                data=query,
-                )
-            time.sleep(2)
+            
+            hasNextPage = True
+            latest_cursor = ""
 
-            # Define cleaner:
-            cleaner: Callable = CLEANERS.get('shopify_partners_app_credit')
+            # Data is paginated so need to go page by page until false
+            while hasNextPage:
+            
+                query: str = QUERIES['app_credit']
+                # Replace dates in placeholders
+                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
+                query = query.replace(':cursor:', latest_cursor)
 
-            # Raise error on 4xx and 5xxx
-            response.raise_for_status()
+                response: httpx._models.Response = self.client.post(  # noqa
+                    url,
+                    headers=self.headers,
+                    data=query,
+                    )
+                time.sleep(2)
 
-            # Create dictionary from response
-            response_data: dict = response.json()
-            for transaction in response_data['data']['app']['events']['edges']:
-                temp_transaction = self.flatten(transaction)
-                yield cleaner(date_day, temp_transaction)
+                # Define cleaner:
+                cleaner: Callable = CLEANERS.get('shopify_partners_app_credit')
+
+                # Raise error on 4xx and 5xxx
+                response.raise_for_status()
+
+                # Create dictionary from response
+                response_data: dict = response.json()
+                hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
+                for transaction in response_data['data']['app']['events']['edges']:
+                    latest_cursor = transaction.get('cursor')
+                    temp_transaction = self.flatten(transaction)
+                    yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_credit')
     
@@ -324,28 +346,39 @@ class Shopify(object):  # noqa: WPS230
         self._create_headers()
 
         for date_day in self._start_days_till_now(start_date_string):
-            query: str = QUERIES['app_relationship']
-            # Replace dates in placeholders
-            query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
-            query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
-            response: httpx._models.Response = self.client.post(  # noqa
-                url,
-                headers=self.headers,
-                data=query,
-                )
-            time.sleep(2)
+            
+            hasNextPage = True
+            latest_cursor = ""
+            
+            # Data is paginated so need to go page by page until false
+            while hasNextPage:
+            
+                query: str = QUERIES['app_relationship']
+                # Replace dates in placeholders
+                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
+                query = query.replace(':cursor:', latest_cursor)
+                
+                response: httpx._models.Response = self.client.post(  # noqa
+                    url,
+                    headers=self.headers,
+                    data=query,
+                    )
+                time.sleep(2)
 
-            # Define cleaner:
-            cleaner: Callable = CLEANERS.get('shopify_partners_app_relationship')
+                # Define cleaner:
+                cleaner: Callable = CLEANERS.get('shopify_partners_app_relationship')
 
-            # Raise error on 4xx and 5xxx
-            response.raise_for_status()
+                # Raise error on 4xx and 5xxx
+                response.raise_for_status()
 
-            # Create dictionary from response
-            response_data: dict = response.json()
-            for transaction in response_data['data']['app']['events']['edges']:
-                temp_transaction = self.flatten(transaction)
-                yield cleaner(date_day, temp_transaction)
+                # Create dictionary from response
+                response_data: dict = response.json()
+                hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
+                for transaction in response_data['data']['app']['events']['edges']:
+                    latest_cursor = transaction.get('cursor')
+                    temp_transaction = self.flatten(transaction)
+                    yield cleaner(date_day, temp_transaction)
 
         self.logger.info('Finished: shopify_partners_app_relationship')
     

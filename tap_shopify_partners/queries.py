@@ -47,11 +47,12 @@ query {
     """,
   'app_sale_adjustment': """
 query {
-  transactions(types: [APP_SALE_ADJUSTMENT], createdAtMin:":fromdate:", createdAtMax:":todate:") {
+  transactions(types: [APP_SALE_ADJUSTMENT], createdAtMin:":fromdate:", createdAtMax:":todate:", first: 100, after: ":cursor:") {
     pageInfo{
         hasNextPage
     }
     edges {
+      cursor
       node {
         ... on AppSaleAdjustment {  
           app{
@@ -95,8 +96,14 @@ query {
       				CREDIT_PENDING],
       occurredAtMin: ":fromdate:"
       occurredAtMax: ":todate:"
+      first: 100
+      after: ":cursor:"
     ) {
+      pageInfo{
+        hasNextPage
+      }
       edges {
+        cursor
         node {
           app {
             name
@@ -160,8 +167,14 @@ query {
       				RELATIONSHIP_UNINSTALLED],
       occurredAtMin: ":fromdate:"
       occurredAtMax: ":todate:"
+      first: 100
+      after: ":cursor:"
     ) {
+      pageInfo{
+        hasNextPage
+      }
       edges {
+        cursor
         node {
           app {
             name
