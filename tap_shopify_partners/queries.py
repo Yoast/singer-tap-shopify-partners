@@ -7,6 +7,9 @@ QUERIES: MappingProxyType = MappingProxyType({
     'app_subscription_sale': """
 query {
   transactions(types: [APP_SUBSCRIPTION_SALE], createdAtMin:":fromdate:", createdAtMax:":todate:", first: 100, after: ":cursor:") {
+    pageInfo{
+        hasNextPage
+    }
     edges {
       cursor
       node {
