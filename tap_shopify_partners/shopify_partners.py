@@ -409,17 +409,18 @@ class Shopify(object):  # noqa: WPS230
                 # Create dictionary from response
                 response_data: dict = response.json()
                 # TODO: if there are problems, might need to get an if statement to handle the weird lower case 'false' or 'true' that will come in.
+                temp_look = response_data['data']['app']['events']['pageInfo']
                 hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
-                self.logger.info(f'**********Has next page: {hasNextPage}')
+                self.logger.info(f'**********Has next page: {hasNextPage}, temp_look variable: {temp_look}')
                 temp_count = 0 #TODO: remove me later
                 for transaction in response_data['data']['app']['events']['edges']:
-                    self.logger.info(f'######## Transaction: {transaction}')
+                    # self.logger.info(f'######## Transaction: {transaction}')
                     latest_cursor = transaction.get('cursor')
                     temp_count += 1 #TODO: remove me later as well
                     temp_transaction = self.flatten(transaction)
                     yield cleaner(date_day, temp_transaction)
 
-            self.logger.info(f'^^^^^^^^^^^Got {temp_count} objects from {date_day}')
+                self.logger.info(f'^^^^^^^^^^^Got {temp_count} objects from {date_day}')
 
         self.logger.info('Finished: shopify_partners_app_subscription_charge')
 
