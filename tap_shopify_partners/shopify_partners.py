@@ -218,7 +218,7 @@ class Shopify(object):  # noqa: WPS230
 
                 # Create dictionary from response
                 response_data: dict = response.json()
-                hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
+                hasNextPage = response_data['data']['transactions']['pageInfo'].get('hasNextPage')
                 for transaction in response_data['data']['transactions']['edges']:
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
