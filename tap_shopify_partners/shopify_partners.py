@@ -412,6 +412,7 @@ class Shopify(object):  # noqa: WPS230
                 hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
                 temp_count = 0 #TODO: remove me later
                 for transaction in response_data['data']['app']['events']['edges']:
+                    self.logger.info(f'######## Transaction: {transaction}')
                     latest_cursor = transaction.get('cursor')
                     temp_count += 1 #TODO: remove me later as well
                     temp_transaction = self.flatten(transaction)
