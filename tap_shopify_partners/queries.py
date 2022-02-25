@@ -6,8 +6,9 @@ from types import MappingProxyType
 QUERIES: MappingProxyType = MappingProxyType({
     'app_subscription_sale': """
 query {
-  transactions(types: [APP_SUBSCRIPTION_SALE], createdAtMin:":fromdate:", createdAtMax:":todate:") {
+  transactions(types: [APP_SUBSCRIPTION_SALE], createdAtMin:":fromdate:", createdAtMax:":todate:", first: 100, after: ":cursor:") {
     edges {
+      cursor
       node {
         id
         createdAt
@@ -44,6 +45,9 @@ query {
   'app_sale_adjustment': """
 query {
   transactions(types: [APP_SALE_ADJUSTMENT], createdAtMin:":fromdate:", createdAtMax:":todate:") {
+    pageInfo{
+        hasNextPage
+    }
     edges {
       node {
         ... on AppSaleAdjustment {  
@@ -184,7 +188,7 @@ query {
       types: [SUBSCRIPTION_CHARGE_ACCEPTED, SUBSCRIPTION_CHARGE_ACTIVATED, SUBSCRIPTION_CHARGE_CANCELED, SUBSCRIPTION_CHARGE_DECLINED, SUBSCRIPTION_CHARGE_EXPIRED, SUBSCRIPTION_CHARGE_FROZEN, SUBSCRIPTION_CHARGE_UNFROZEN]
       occurredAtMin: ":fromdate:"
       occurredAtMax: ":todate:"
-      first: 20
+      first: 100
       after: ":cursor:"
     ) {
       pageInfo{
