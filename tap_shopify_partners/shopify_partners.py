@@ -410,6 +410,7 @@ class Shopify(object):  # noqa: WPS230
                 response_data: dict = response.json()
                 # TODO: if there are problems, might need to get an if statement to handle the weird lower case 'false' or 'true' that will come in.
                 hasNextPage = response_data['data']['app']['events']['pageInfo'].get('hasNextPage')
+                self.logger.info(f'**********Has next page: {hasNextPage}')
                 temp_count = 0 #TODO: remove me later
                 for transaction in response_data['data']['app']['events']['edges']:
                     self.logger.info(f'######## Transaction: {transaction}')

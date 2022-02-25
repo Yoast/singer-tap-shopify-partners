@@ -191,6 +191,7 @@ query {
         hasNextPage
       }
       edges {
+        cursor
         node {
           app {
             name
