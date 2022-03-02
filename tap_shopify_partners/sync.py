@@ -82,7 +82,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
     )
 
     # Create new bookmark
-    new_bookmark: str = tools.create_bookmark(stream.tap_stream_id, bookmark)
+    # new_bookmark: str = tools.create_bookmark(stream.tap_stream_id, bookmark)
 
     # Write a row to the stream
     singer.write_record(
@@ -91,13 +91,13 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         time_extracted=datetime.now(timezone.utc),
     )
 
-    if new_bookmark:
+    if bookmark:
         # Save the bookmark to the state
         singer.write_bookmark(
             state,
             stream.tap_stream_id,
             STREAMS[stream.tap_stream_id]['bookmark'],
-            new_bookmark,
+            bookmark,
         )
 
         # Clear currently syncing
