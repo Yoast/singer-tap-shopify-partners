@@ -105,5 +105,4 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         tools.clear_currently_syncing(state)
 
         # Write the bootmark
-        LOGGER.info(f'`````In sync_record func: here is state: {state}')
         singer.write_state(state)
