@@ -48,6 +48,7 @@ def sync(
         )
 
         LOGGER.debug(f'Stream state: {stream_state}')
+        LOGGER.info(f'Stream state: {stream_state}')
         # Write the schema
         singer.write_schema(
             stream_name=stream.tap_stream_id,
@@ -104,4 +105,5 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         tools.clear_currently_syncing(state)
 
         # Write the bootmark
+        LOGGER.info(f'`````In sync_record func: here is state: {state}')
         singer.write_state(state)
