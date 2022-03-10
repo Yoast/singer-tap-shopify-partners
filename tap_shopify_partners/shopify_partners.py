@@ -114,13 +114,11 @@ class Shopify(object):  # noqa: WPS230
         first_run = True
 
         for date_day in self._start_days_till_now(start_date_string):
-            
             hasNextPage = True
             latest_cursor = ""
 
             # Data is paginated so need to go page by page until false
             while hasNextPage:
-            
                 query: str = QUERIES['app_subscription_sale']
                 # Replace dates in placeholders
                 if first_run:
@@ -154,6 +152,9 @@ class Shopify(object):  # noqa: WPS230
 
                 # Create dictionary from response
                 response_data: dict = response.json()
+                self.logger.info(
+                    f'```````Response:{response_data}',
+                )
                 hasNextPage = response_data['data']['transactions']['pageInfo'].get('hasNextPage')
                 for transaction in response_data['data']['transactions']['edges']:
                     latest_cursor = transaction.get('cursor')
