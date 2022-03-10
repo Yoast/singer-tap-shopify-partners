@@ -111,6 +111,8 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
+        first_run = True
+
         for date_day in self._start_days_till_now(start_date_string):
             
             hasNextPage = True
@@ -121,9 +123,21 @@ class Shopify(object):  # noqa: WPS230
             
                 query: str = QUERIES['app_subscription_sale']
                 # Replace dates in placeholders
-                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                if first_run:
+                    query = query.replace(':fromdate:', start_date_string)
+                    temp_start = start_date_string
+                else:
+                    query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                    temp_start = date_day + "T00:00:00.000000Z"
+
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
+
+                first_run = False
+                
+                self.logger.info(
+                    f'`````Start date used: {temp_start}',
+                )
 
                 response: httpx._models.Response = self.client.post(  # noqa
                     url,
