@@ -99,6 +99,7 @@ class Shopify(object):  # noqa: WPS230
         )
          # The start date until now function wants a string
         start_date_string = str(start_date)
+        start_date_string = start_date_string.replace(' ', 'T')
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -138,9 +139,6 @@ class Shopify(object):  # noqa: WPS230
                 
                 self.logger.info(
                     f'`````Start date used: {temp_start}',
-                )
-                self.logger.info(
-                    f'```````Query:{query}',
                 )
 
                 response: httpx._models.Response = self.client.post(  # noqa
