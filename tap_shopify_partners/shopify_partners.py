@@ -139,6 +139,9 @@ class Shopify(object):  # noqa: WPS230
                 self.logger.info(
                     f'`````Start date used: {temp_start}',
                 )
+                self.logger.info(
+                    f'```````Query:{query}',
+                )
 
                 response: httpx._models.Response = self.client.post(  # noqa
                     url,
