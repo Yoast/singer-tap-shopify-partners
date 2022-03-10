@@ -99,7 +99,7 @@ class Shopify(object):  # noqa: WPS230
         )
          # The start date until now function wants a string
         start_date_string = str(start_date)
-        start_date_string = start_date_string.replace(' ', 'T')
+        first_start_date = start_date_string.replace(' ', 'T')
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -123,7 +123,7 @@ class Shopify(object):  # noqa: WPS230
                 query: str = QUERIES['app_subscription_sale']
                 # Replace dates in placeholders
                 if first_run:
-                    query = query.replace(':fromdate:', start_date_string)
+                    query = query.replace(':fromdate:', first_start_date)
                     temp_start = start_date_string
                 else:
                     query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
