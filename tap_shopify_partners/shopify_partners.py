@@ -131,9 +131,6 @@ class Shopify(object):  # noqa: WPS230
 
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
-                self.logger.info(
-                    f'^^^^^^^^Query: {query}',
-                )
 
                 first_run = False
                 
