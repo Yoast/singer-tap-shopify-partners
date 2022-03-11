@@ -160,7 +160,7 @@ class Shopify(object):  # noqa: WPS230
                     # The first result is the oldest result in the query, so only need to get the cursor once
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
-                    # temp_list.append([temp_transaction])
+                    temp_list.append([temp_transaction])
                     # self.logger.info(f'@@@Transaction: {temp_transaction}')
                     yield cleaner(date_day, temp_transaction)
             
