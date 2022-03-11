@@ -119,7 +119,6 @@ class Shopify(object):  # noqa: WPS230
             hasNextPage = True
             latest_cursor = ""
             temp_list = []
-            first_cursor = True
 
             # Data is paginated so need to go page by page until false
             while hasNextPage:
@@ -159,11 +158,9 @@ class Shopify(object):  # noqa: WPS230
                 hasNextPage = response_data['data']['transactions']['pageInfo'].get('hasNextPage')
                 for transaction in response_data['data']['transactions']['edges']:
                     # The first result is the oldest result in the query, so only need to get the cursor once
-                    if first_cursor:
-                        latest_cursor = transaction.get('cursor')
+                    latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
                     temp_list.append([temp_transaction])
-                    first_cursor = False
                     # yield cleaner(date_day, temp_transaction)
             
             self.logger.info(f'*****List, pre-sort: {temp_list}')
