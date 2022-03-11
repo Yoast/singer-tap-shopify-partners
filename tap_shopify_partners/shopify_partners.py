@@ -112,11 +112,14 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
+        # For starting with the bookmark value
         first_run = True
 
         for date_day in self._start_days_till_now(start_date_string):
             hasNextPage = True
             latest_cursor = ""
+            temp_list = []
+            first_cursor = True
 
             # Data is paginated so need to go page by page until false
             while hasNextPage:
@@ -125,14 +128,14 @@ class Shopify(object):  # noqa: WPS230
                 if first_run:
                     query = query.replace(':fromdate:', first_start_date)
                     temp_start = start_date_string
+                    self.logger.info('=======Inside first run')
                 else:
                     query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
                     temp_start = date_day + "T00:00:00.000000Z"
+                    self.logger.info('=+++==Inside second run')
 
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
-
-                first_run = False
                 
                 self.logger.info(
                     f'`````Start date used: {temp_start}',
@@ -155,9 +158,20 @@ class Shopify(object):  # noqa: WPS230
                 response_data: dict = response.json()
                 hasNextPage = response_data['data']['transactions']['pageInfo'].get('hasNextPage')
                 for transaction in response_data['data']['transactions']['edges']:
-                    latest_cursor = transaction.get('cursor')
+                    # The first result is the oldest result in the query, so only need to get the cursor once
+                    if first_cursor:
+                        latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
-                    yield cleaner(date_day, temp_transaction)
+                    temp_list.append([temp_transaction])
+                    first_cursor = False
+                    # yield cleaner(date_day, temp_transaction)
+            
+            temp_list_sort = sorted(temp_list, key=lambda d: d['node.createdAt'])
+
+            for i in temp_list_sort:
+                yield cleaner(date_day, i)
+
+            first_run = False
 
         self.logger.info('Finished: shopify_partners_app_subscription_sale')
     

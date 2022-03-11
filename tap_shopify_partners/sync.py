@@ -91,11 +91,9 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         row,
         time_extracted=datetime.now(timezone.utc),
     )
-    #TODO: add logger 
     if bookmark:
         # Save the bookmark to the state
         singer.write_bookmark(
-            #TODO: add logger with the bookmark
             state,
             stream.tap_stream_id,
             STREAMS[stream.tap_stream_id]['bookmark'],
