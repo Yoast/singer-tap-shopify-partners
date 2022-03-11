@@ -161,14 +161,14 @@ class Shopify(object):  # noqa: WPS230
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
                     temp_list.append([temp_transaction])
-                    # self.logger.info(f'@@@Transaction: {temp_transaction}')
+                    self.logger.info(f'@@@Transaction: {temp_transaction}')
                     # yield cleaner(date_day, temp_transaction)
             
             # self.logger.info(f'*****List, pre-sort: {temp_list}')
             temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.createdAt'])
 
             for i in temp_list_sort:
-                self.logger.info(f'@@@Transaction: {i}')
+                self.logger.info(f'*****Transaction: {i}')
                 yield cleaner(date_day, i)
 
             first_run = False
