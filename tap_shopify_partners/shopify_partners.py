@@ -169,7 +169,7 @@ class Shopify(object):  # noqa: WPS230
 
             for i in temp_list_sort:
                 self.logger.info(f'*****Transaction: {i[0]}')
-                yield cleaner(date_day, i)
+                yield cleaner(date_day, i[0])
 
             first_run = False
 
