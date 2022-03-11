@@ -161,6 +161,7 @@ class Shopify(object):  # noqa: WPS230
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
                     # temp_list.append([temp_transaction])
+                    self.logger.info(f'@@@Transaction: {temp_transaction}')
                     yield cleaner(date_day, temp_transaction)
             
             # self.logger.info(f'*****List, pre-sort: {temp_list}')
