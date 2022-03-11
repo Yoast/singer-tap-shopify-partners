@@ -157,14 +157,12 @@ class Shopify(object):  # noqa: WPS230
                 response_data: dict = response.json()
                 hasNextPage = response_data['data']['transactions']['pageInfo'].get('hasNextPage')
                 for transaction in response_data['data']['transactions']['edges']:
-                    # The first result is the oldest result in the query, so only need to get the cursor once
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
                     temp_list.append([temp_transaction])
                     # self.logger.info(f'@@@Transaction: {temp_transaction}')
                     # yield cleaner(date_day, temp_transaction)
-            
-            self.logger.info(f'#####List, pre-sort: {temp_list}')
+
             temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.createdAt'])
 
             for i in temp_list_sort:
