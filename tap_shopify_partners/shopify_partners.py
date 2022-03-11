@@ -166,6 +166,7 @@ class Shopify(object):  # noqa: WPS230
                     first_cursor = False
                     # yield cleaner(date_day, temp_transaction)
             
+            self.logger.info(f'*****List, pre-sort: {temp_list}')
             temp_list_sort = sorted(temp_list, key=lambda d: d['node.createdAt'])
 
             for i in temp_list_sort:
