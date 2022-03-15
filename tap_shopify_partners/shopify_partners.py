@@ -126,19 +126,11 @@ class Shopify(object):  # noqa: WPS230
                 # Replace dates in placeholders
                 if first_run:
                     query = query.replace(':fromdate:', first_start_date)
-                    temp_start = start_date_string
-                    self.logger.info('=======Inside first run')
                 else:
                     query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
-                    temp_start = date_day + "T00:00:00.000000Z"
-                    self.logger.info('=+++==Inside second run')
 
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
-                
-                self.logger.info(
-                    f'`````Start date used: {temp_start}',
-                )
 
                 response: httpx._models.Response = self.client.post(  # noqa
                     url,
@@ -160,13 +152,11 @@ class Shopify(object):  # noqa: WPS230
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
                     temp_list.append([temp_transaction])
-                    # self.logger.info(f'@@@Transaction: {temp_transaction}')
                     # yield cleaner(date_day, temp_transaction)
 
             temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.createdAt'])
 
             for i in temp_list_sort:
-                self.logger.info(f'*****Transaction: {i[0]}')
                 yield cleaner(date_day, i[0])
 
             first_run = False
@@ -202,6 +192,7 @@ class Shopify(object):  # noqa: WPS230
         )
          # The start date until now function wants a string
         start_date_string = str(start_date)
+        first_start_date = start_date_string.replace(' ', 'T')
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -214,17 +205,24 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
+        # For starting with the bookmark value
+        first_run = True
+
         for date_day in self._start_days_till_now(start_date_string):
-            
             hasNextPage = True
             latest_cursor = ""
-            
+            temp_list = []
+
             # Data is paginated so need to go page by page until false
             while hasNextPage:
             
                 query: str = QUERIES['app_sale_adjustment']
                 # Replace dates in placeholders
-                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                if first_run:
+                    query = query.replace(':fromdate:', first_start_date)
+                else:
+                    query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
 
@@ -247,7 +245,14 @@ class Shopify(object):  # noqa: WPS230
                 for transaction in response_data['data']['transactions']['edges']:
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
-                    yield cleaner(date_day, temp_transaction)
+                    temp_list.append([temp_transaction])
+
+            temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.createdAt'])
+
+            for i in temp_list_sort:
+                yield cleaner(date_day, i[0])
+
+            first_run = False
 
         self.logger.info('Finished: shopify_partners_app_sale_adjustment')
     
@@ -267,6 +272,7 @@ class Shopify(object):  # noqa: WPS230
 
         # Validate the start_date value exists
         start_date_input: str = str(kwargs.get('start_date', ''))
+
         if not start_date_input:
             raise ValueError('The parameter start_date is required.')
 
@@ -280,6 +286,7 @@ class Shopify(object):  # noqa: WPS230
 
         # The start date until now function wants a string
         start_date_string = str(start_date)
+        first_start_date = start_date_string.replace(' ', 'T')
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -292,17 +299,23 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
+        # For starting with the bookmark value
+        first_run = True
+
         for date_day in self._start_days_till_now(start_date_string):
-            
             hasNextPage = True
             latest_cursor = ""
+            temp_list = []
 
             # Data is paginated so need to go page by page until false
             while hasNextPage:
-            
                 query: str = QUERIES['app_credit']
                 # Replace dates in placeholders
-                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                if first_run:
+                    query = query.replace(':fromdate:', first_start_date)
+                else:
+                    query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
 
@@ -325,8 +338,16 @@ class Shopify(object):  # noqa: WPS230
                 for transaction in response_data['data']['app']['events']['edges']:
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
-                    yield cleaner(date_day, temp_transaction)
+                    temp_list.append([temp_transaction])
 
+            temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.occurredAt'])
+
+            for i in temp_list_sort:
+                yield cleaner(date_day, i[0])
+
+            first_run = False
+        
+        
         self.logger.info('Finished: shopify_partners_app_credit')
     
     def shopify_partners_app_relationship(  # noqa: WPS210, WPS213
@@ -358,6 +379,7 @@ class Shopify(object):  # noqa: WPS230
         )
          # The start date until now function wants a string
         start_date_string = str(start_date)
+        first_start_date = start_date_string.replace(' ', 'T')
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -370,17 +392,23 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
+        # For starting with the bookmark value
+        first_run = True
+
         for date_day in self._start_days_till_now(start_date_string):
-            
             hasNextPage = True
             latest_cursor = ""
+            temp_list = []
             
             # Data is paginated so need to go page by page until false
             while hasNextPage:
-            
                 query: str = QUERIES['app_relationship']
                 # Replace dates in placeholders
-                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                if first_run:
+                    query = query.replace(':fromdate:', first_start_date)
+                else:
+                    query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
                 
@@ -403,7 +431,14 @@ class Shopify(object):  # noqa: WPS230
                 for transaction in response_data['data']['app']['events']['edges']:
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
-                    yield cleaner(date_day, temp_transaction)
+                    temp_list.append([temp_transaction])
+
+            temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.occurredAt'])
+
+            for i in temp_list_sort:
+                yield cleaner(date_day, i[0])
+
+            first_run = False
 
         self.logger.info('Finished: shopify_partners_app_relationship')
     
@@ -436,6 +471,7 @@ class Shopify(object):  # noqa: WPS230
         )
          # The start date until now function wants a string
         start_date_string = str(start_date)
+        first_start_date = start_date_string.replace(' ', 'T')
         # Extra kwargs will be converted to parameters in the API requests
         # start_date is parsed into batches, thus we remove it from the kwargs
         kwargs.pop('start_date', None)
@@ -448,17 +484,23 @@ class Shopify(object):  # noqa: WPS230
         )
         self._create_headers()
 
-        for date_day in self._start_days_till_now(start_date_string):
+        # For starting with the bookmark value
+        first_run = True
 
+        for date_day in self._start_days_till_now(start_date_string):
             hasNextPage = True
             latest_cursor = ""
+            temp_list = []
 
             # Data is paginated so need to go page by page until false
             while hasNextPage:
-
                 query: str = QUERIES['app_subscription_charge']
                 # Replace dates in placeholders
-                query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                if first_run:
+                    query = query.replace(':fromdate:', first_start_date)
+                else:
+                    query = query.replace(':fromdate:', date_day + "T00:00:00.000000Z")
+                
                 query = query.replace(':todate:', date_day + "T23:59:59.999999Z")
                 query = query.replace(':cursor:', latest_cursor)
 
@@ -481,7 +523,14 @@ class Shopify(object):  # noqa: WPS230
                 for transaction in response_data['data']['app']['events']['edges']:
                     latest_cursor = transaction.get('cursor')
                     temp_transaction = self.flatten(transaction)
-                    yield cleaner(date_day, temp_transaction)
+                    temp_list.append([temp_transaction])
+
+            temp_list_sort = sorted(temp_list, key=lambda d: d[0]['node.occurredAt'])
+
+            for i in temp_list_sort:
+                yield cleaner(date_day, i[0])
+
+            first_run = False
 
         self.logger.info('Finished: shopify_partners_app_subscription_charge')
 
