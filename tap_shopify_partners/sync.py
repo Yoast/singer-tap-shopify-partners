@@ -84,8 +84,6 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
 
     # Create new bookmark
     # new_bookmark: str = tools.create_bookmark(stream.tap_stream_id, bookmark)
-    LOGGER.info('-------------------------------------------')
-    LOGGER.info(f'^^^^Bookmark: {bookmark}')
 
     # Write a row to the stream
     singer.write_record(
@@ -93,27 +91,14 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         row,
         time_extracted=datetime.now(timezone.utc),
     )
-    temp_row_var = row['created_at']
-    temp_state_var = state['bookmarks']['shopify_partners_app_subscription_sale']['start_date']
-    LOGGER.info(f'%%%%%%%%%row: {temp_row_var}')
-    LOGGER.info(f'%%%%%%%state: {temp_state_var}')
-    
-    temp_state = state
-    tools.clear_currently_syncing(temp_state)
 
-    # Add milisecond so data is never duplicated:
-    for key1 in temp_state:
-        for key2 in temp_state[key1]:
-            temp_state[key1][key2]['start_date'] = temp_state[key1][key2]['start_date'].replace('000000Z', '100000Z')
-    
+    # Add milisecond to bookmark so data is never duplicated:
     bookmark = bookmark.replace('000000Z', '100000Z')
-    temp_state_var2 = temp_state['bookmarks']['shopify_partners_app_subscription_sale']['start_date']
-    LOGGER.info(f'```````state: {temp_state_var2}')
     
     if bookmark:
         # Save the bookmark to the state
         singer.write_bookmark(
-            temp_state,
+            state,
             stream.tap_stream_id,
             STREAMS[stream.tap_stream_id]['bookmark'],
             bookmark,
@@ -123,7 +108,4 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         tools.clear_currently_syncing(state)
 
         # Write the bookmark
-        singer.write_state(temp_state)
-    LOGGER.info(f'%%state_writ: {bookmark}')
-    LOGGER.info(f'')
-    LOGGER.info('-------------------------------------------')
+        singer.write_state(state)
