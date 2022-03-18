@@ -99,13 +99,16 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         # state = state['start_date'].replace('000000Z', '100000Z')
         LOGGER.info(f'%%%%%%%%%row: {row}')
         LOGGER.info(f'%%%%%%%state: {state}')
-        for key1 in state:
-            for key2 in state[key1]:
-                state[key1][key2]['start_date'] = state[key1][key2]['start_date'].replace('000000Z', '100000Z')
+        temp_state = state
+        tools.clear_currently_syncing(temp_state)
+
+        for key1 in temp_state:
+            for key2 in temp_state[key1]:
+                temp_state[key1][key2]['start_date'] = temp_state[key1][key2]['start_date'].replace('000000Z', '100000Z')
         
         LOGGER.info(f'```````state: {state}')
         singer.write_bookmark(
-            state,
+            temp_state,
             stream.tap_stream_id,
             STREAMS[stream.tap_stream_id]['bookmark'],
             bookmark,
@@ -114,5 +117,5 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         # Clear currently syncing
         tools.clear_currently_syncing(state)
 
-        # Write the bootmark
+        # Write the bookmark
         singer.write_state(state)
