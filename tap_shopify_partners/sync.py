@@ -84,7 +84,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
 
     # Create new bookmark
     # new_bookmark: str = tools.create_bookmark(stream.tap_stream_id, bookmark)
-
+    LOGGER.info('-------------------------------------------')
     LOGGER.info(f'^^^^^^ Bookmark: {bookmark}')
 
     # Write a row to the stream
@@ -105,7 +105,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
             temp_state[key1][key2]['start_date'] = temp_state[key1][key2]['start_date'].replace('000000Z', '100000Z')
     
     LOGGER.info(f'```````state: {temp_state}')
-
+    LOGGER.info('-------------------------------------------')
     if bookmark:
         # Save the bookmark to the state
         singer.write_bookmark(
