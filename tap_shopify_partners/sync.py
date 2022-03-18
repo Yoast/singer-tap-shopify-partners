@@ -106,7 +106,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
             for key2 in temp_state[key1]:
                 temp_state[key1][key2]['start_date'] = temp_state[key1][key2]['start_date'].replace('000000Z', '100000Z')
         
-        LOGGER.info(f'```````state: {state}')
+        LOGGER.info(f'```````state: {temp_state}')
         singer.write_bookmark(
             temp_state,
             stream.tap_stream_id,
