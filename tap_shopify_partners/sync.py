@@ -97,11 +97,13 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         
         # Add milisecond so data is never duplicated:
         # state = state['start_date'].replace('000000Z', '100000Z')
+        LOGGER.info(f'%%%%%%%%%row: {row}')
+        LOGGER.info(f'%%%%%%%state: {state}')
         for key1 in state:
             for key2 in state[key1]:
-                LOGGER.info(f'%%%%%%%state: {state}')
                 state[key1][key2]['start_date'] = state[key1][key2]['start_date'].replace('000000Z', '100000Z')
-                LOGGER.info(f'```````state: {state}')
+        
+        LOGGER.info(f'```````state: {state}')
         singer.write_bookmark(
             state,
             stream.tap_stream_id,
