@@ -95,7 +95,6 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         # Save the bookmark to the state
         # Temporary logging:
         LOGGER.info(f'```````state: {state}')
-        LOGGER.info(f'```````state type: {type(state)}')
         singer.write_bookmark(
             state,
             stream.tap_stream_id,
