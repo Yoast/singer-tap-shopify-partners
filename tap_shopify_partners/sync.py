@@ -99,6 +99,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         # state = state['start_date'].replace('000000Z', '100000Z')
         for key1 in state:
             for key2 in state[key1]:
+                LOGGER.info(f'%%%%%%%state: {state}')
                 state[key1][key2]['start_date'] = state[key1][key2]['start_date'].replace('000000Z', '100000Z')
                 LOGGER.info(f'```````state: {state}')
         singer.write_bookmark(
