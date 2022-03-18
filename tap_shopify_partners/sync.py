@@ -93,9 +93,10 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         row,
         time_extracted=datetime.now(timezone.utc),
     )
-
-    LOGGER.info(f'%%%%%%%%%row: {row}')
-    LOGGER.info(f'%%%%%%%state: {state}')
+    temp_row_var = row['created_at']
+    temp_state_var = state['bookmarks']['shopify_partners_app_subscription_sale']['start_date']
+    LOGGER.info(f'%%%%%%%%%row: {temp_row_var}')
+    LOGGER.info(f'%%%%%%%state: {temp_state_var}')
     temp_state = state
     tools.clear_currently_syncing(temp_state)
 
@@ -104,7 +105,8 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         for key2 in temp_state[key1]:
             temp_state[key1][key2]['start_date'] = temp_state[key1][key2]['start_date'].replace('000000Z', '100000Z')
     
-    LOGGER.info(f'```````state: {temp_state}')
+    temp_state_var2 = temp_state['bookmarks']['shopify_partners_app_subscription_sale']['start_date']
+    LOGGER.info(f'```````state: {temp_state_var}')
     LOGGER.info('-------------------------------------------')
     if bookmark:
         # Save the bookmark to the state
