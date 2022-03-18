@@ -93,7 +93,6 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
     )
     if bookmark:
         # Save the bookmark to the state
-        # Temporary logging:
         
         # Add milisecond so data is never duplicated:
         # state = state['start_date'].replace('000000Z', '100000Z')
@@ -118,4 +117,4 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         tools.clear_currently_syncing(state)
 
         # Write the bookmark
-        singer.write_state(state)
+        singer.write_state(temp_state)
