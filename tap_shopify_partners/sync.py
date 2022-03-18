@@ -106,8 +106,9 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
         for key2 in temp_state[key1]:
             temp_state[key1][key2]['start_date'] = temp_state[key1][key2]['start_date'].replace('000000Z', '100000Z')
     
+    bookmark = bookmark.replace('000000Z', '100000Z')
     temp_state_var2 = temp_state['bookmarks']['shopify_partners_app_subscription_sale']['start_date']
-    LOGGER.info(f'```````state: {temp_state_var}')
+    LOGGER.info(f'```````state: {temp_state_var2}')
     
     if bookmark:
         # Save the bookmark to the state
