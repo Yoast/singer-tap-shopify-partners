@@ -1,5 +1,5 @@
 {
-    "selected": true,
+    "selected": false,
     "type": [
         "null",
         "object"
@@ -47,10 +47,16 @@
             "type": "string"
         },
         "billing_interval": {
-            "type": "string"
+            "type": [
+				"null",
+				"string"
+			]
         },
         "charge_id": {
-            "type": "string"
+            "type": [
+				"null",
+				"string"
+			]
         }
     }
 }

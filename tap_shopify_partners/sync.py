@@ -85,6 +85,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
     # Create new bookmark
     # new_bookmark: str = tools.create_bookmark(stream.tap_stream_id, bookmark)
 
+    LOGGER.info('+++++++About to write call singer.write_record')
     # Write a row to the stream
     singer.write_record(
         stream.tap_stream_id,
@@ -97,6 +98,7 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
     
     if bookmark:
         # Save the bookmark to the state
+        LOGGER.info(f'======Inside of if bookmark statement, state: {state}')
         singer.write_bookmark(
             state,
             stream.tap_stream_id,
@@ -106,6 +108,6 @@ def sync_record(stream: CatalogEntry, row: dict, state: dict) -> None:
 
         # Clear currently syncing
         tools.clear_currently_syncing(state)
-
+        LOGGER.info('[[[[[[About to write bookmark')
         # Write the bookmark
         singer.write_state(state)

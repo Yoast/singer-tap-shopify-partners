@@ -299,10 +299,10 @@ STREAMS: MappingProxyType = MappingProxyType({
                 'map': 'shop_id', 'null': False,
             },
             'billingInterval': {
-                'map': 'billing_interval', 'null': False,
+                'map': 'billing_interval', 'null': True,
             }, 
             'chargeId': {
-                'map': 'charge_id', 'null': False,
+                'map': 'charge_id', 'null': True,
             },  
         }
     },
