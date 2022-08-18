@@ -184,40 +184,6 @@ def clean_shopify_partners_app_sale_adjustment(
 
     return clean_row(cleaned_data, mapping)
 
-def clean_shopify_partners_app_credit(
-    date_day: str,
-    response_data: dict,
-) -> dict:
-    """Clean shopify_partners_app_credit data.
-
-        Arguments:
-            response_data {dict} -- input response_data
-
-        Returns:
-            dict -- cleaned response_data
-        """
-    # Get the mapping from the STREAMS
-    mapping: Optional[dict] = STREAMS['shopify_partners_app_credit'].get(
-        'mapping',
-    )
-
-    cleaned_data: dict = {
-        "app": response_data["node.app.name"],
-        "appId": response_data["node.app.id"],
-        "occurredAt": response_data["node.occurredAt"],
-        "shopDomain": response_data["node.shop.myshopifyDomain"],
-        "shopName": response_data["node.shop.name"],
-        "shopId": response_data["node.shop.id"],
-        "type": response_data["node.type"],
-        "appCredit": float(response_data["node.appCredit.amount"]),
-        "appCreditCurrencyCode": response_data["node.appCredit.amount.currencyCode"],
-        "appCreditId": response_data["node.appCredit.id"],
-        "appCreditName": response_data["node.appCredit.name"],
-        "appCreditTest": response_data["node.appCredit.test"],
-    }
-
-    return clean_row(cleaned_data, mapping)
-
 def clean_shopify_partners_app_relationship(
     date_day: str,
     response_data: dict,

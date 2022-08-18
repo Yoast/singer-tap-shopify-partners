@@ -356,50 +356,6 @@ STREAMS: MappingProxyType = MappingProxyType({
             },
         }
     },
-    'shopify_partners_app_credit': {
-        'key_properties': 'shop_id',
-        'replication_method': 'INCREMENTAL',
-        'replication_key': 'occurred_at',
-        'bookmark': 'start_date',
-        'mapping': {
-            'app': {
-                'map': 'app', 'null': False,
-            },
-            'appId': {
-                'map': 'app_id', 'null': False,
-            },
-            'occurredAt': {
-                'map': 'occurred_at', 'null': False,
-            },
-            'shopDomain': {
-                'map': 'shop_domain', 'null': False,
-            },
-            'shopName': {
-                'map': 'shop_name', 'null': False,
-            },
-            'shopId': {
-                'map': 'shop_id', 'null': False,
-            },
-            'type': {
-                'map': 'type', 'null': False,
-            },
-            'appCredit': {
-                'map': 'app_credit', 'null': True,
-            },
-            'appCreditCurrencyCode': {
-                'map': 'app_credit_currency_code', 'null': True,
-            },
-            'appCreditId': {
-                'map': 'app_credit_id', 'null': True,
-            },
-            'appCreditName': {
-                'map': 'app_credit_name', 'null': True,
-            },
-            'appCreditTest': {
-                'map': 'app_credit_test', 'null': True,
-            },
-        }
-    },
     'shopify_partners_app_relationship': {
         'key_properties': 'shop_id',
         'replication_method': 'INCREMENTAL',
