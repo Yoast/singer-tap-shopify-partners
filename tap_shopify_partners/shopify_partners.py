@@ -19,7 +19,7 @@ from tap_shopify_partners.queries import QUERIES
 API_SCHEME: str = 'https://'
 API_BASE_URL: str = 'partners.shopify.com/'
 API_ORG_ID: str = ':organization_id:/'
-API_VERSION: str = 'api/2022-07/'
+API_VERSION: str = 'api/2024-04/'
 API_PATH_CALL_TYPE: str = 'graphql.json'
 
 HEADERS: MappingProxyType = MappingProxyType({  # Frozen dictionary
